@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KotaniAntViewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Kotani's Ant Viewer" Height="600" Width="900">
+    <Window.Resources>
+        <DataTemplate x:Key="CellTemplate">
+            <TextBlock Text="{Binding Min, StringFormat=\{0:F3\}}" Width="30"/>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="CellsTemplate">
+            <UniformGrid Rows="{Binding Size}" Columns="{Binding Size}"/>
+        </ItemsPanelTemplate>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:AppModel/>
+    </Window.DataContext>
     <Grid>
-
+        <ListBox ItemsPanel="{DynamicResource CellsTemplate}" ItemTemplate="{DynamicResource CellTemplate}" ItemsSource="{Binding Cells}" Width="500" Height="500"/>
     </Grid>
 </Window>
