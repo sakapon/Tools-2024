@@ -8,7 +8,7 @@
         Title="Kotani's Ant Viewer" Height="600" Width="900">
     <Window.Resources>
         <DataTemplate x:Key="CellTemplate">
-            <TextBlock Text="{Binding Min, StringFormat=\{0:F3\}}" Width="30"/>
+            <Rectangle Fill="{Binding Color}"/>
         </DataTemplate>
         <ItemsPanelTemplate x:Key="CellsTemplate">
             <UniformGrid Rows="{Binding Size}" Columns="{Binding Size}"/>
@@ -18,6 +18,6 @@
         <local:AppModel/>
     </Window.DataContext>
     <Grid>
-        <ListBox ItemsPanel="{DynamicResource CellsTemplate}" ItemTemplate="{DynamicResource CellTemplate}" ItemsSource="{Binding Cells}" Width="500" Height="500"/>
+        <ItemsControl ItemsPanel="{DynamicResource CellsTemplate}" ItemTemplate="{DynamicResource CellTemplate}" ItemsSource="{Binding Cells}" Width="500" Height="500"/>
     </Grid>
 </Window>
