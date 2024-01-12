@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KotaniAntViewer"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Name="window"
         mc:Ignorable="d"
         Title="Kotani's Ant Viewer" Height="600" Width="900" FontSize="20">
     <Window.Resources>
         <DataTemplate x:Key="CellTemplate">
-            <Rectangle Fill="{Binding Color}"/>
+            <Rectangle Fill="{Binding Color}" MouseEnter="Rectangle_MouseEnter" Margin="0,0,-1,-1"/>
         </DataTemplate>
         <ItemsPanelTemplate x:Key="CellsTemplate">
             <UniformGrid Rows="{Binding Size}" Columns="{Binding Size}"/>

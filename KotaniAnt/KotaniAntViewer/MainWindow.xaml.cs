@@ -20,5 +20,10 @@ namespace KotaniAntViewer
 		{
 			InitializeComponent();
 		}
+
+		private void Rectangle_MouseEnter(object sender, MouseEventArgs e)
+		{
+			((MainViewModel)DataContext).SelectedCell.Value = (Cell)((FrameworkElement)sender).DataContext;
+		}
 	}
 }
