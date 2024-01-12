@@ -1,4 +1,6 @@
-﻿namespace KotaniAntViewer
+﻿using Reactive.Bindings;
+
+namespace KotaniAntViewer
 {
 	public class AppModel
 	{
@@ -17,6 +19,7 @@
 
 		public int Size => Resolution + 1;
 		public Cell[] Cells { get; }
+		public ReactiveProperty<Cell> SelectedCell { get; } = new ReactiveProperty<Cell>();
 
 		public AppModel()
 		{
@@ -36,6 +39,8 @@
 					};
 				})
 				.ToArray();
+
+			SelectedCell.Value = Cells[0];
 		}
 	}
 

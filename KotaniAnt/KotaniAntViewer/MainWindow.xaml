@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KotaniAntViewer"
         mc:Ignorable="d"
-        Title="Kotani's Ant Viewer" Height="600" Width="900">
+        Title="Kotani's Ant Viewer" Height="600" Width="900" FontSize="20">
     <Window.Resources>
         <DataTemplate x:Key="CellTemplate">
             <Rectangle Fill="{Binding Color}"/>
@@ -17,7 +17,23 @@
     <Window.DataContext>
         <local:AppModel/>
     </Window.DataContext>
-    <Grid>
-        <ItemsControl ItemsPanel="{DynamicResource CellsTemplate}" ItemTemplate="{DynamicResource CellTemplate}" ItemsSource="{Binding Cells}" Width="500" Height="500"/>
-    </Grid>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Right" Width="200" VerticalAlignment="Center" Margin="10,0,50,0">
+            <StackPanel DataContext="{Binding SelectedCell.Value}">
+                <Grid>
+                    <TextBlock Text="x:"/>
+                    <TextBlock Text="{Binding X, StringFormat=\{0:F3\}}" HorizontalAlignment="Right"/>
+                </Grid>
+                <Grid>
+                    <TextBlock Text="y:"/>
+                    <TextBlock Text="{Binding Y, StringFormat=\{0:F3\}}" HorizontalAlignment="Right"/>
+                </Grid>
+                <Grid>
+                    <TextBlock Text="Distance:"/>
+                    <TextBlock Text="{Binding Min, StringFormat=\{0:F3\}}" HorizontalAlignment="Right"/>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+        <ItemsControl ItemsPanel="{DynamicResource CellsTemplate}" ItemTemplate="{DynamicResource CellTemplate}" ItemsSource="{Binding Cells}" Width="480" Height="480"/>
+    </DockPanel>
 </Window>
