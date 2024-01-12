@@ -15,7 +15,7 @@
         </ItemsPanelTemplate>
     </Window.Resources>
     <Window.DataContext>
-        <local:AppModel/>
+        <local:MainViewModel/>
     </Window.DataContext>
     <DockPanel>
         <StackPanel DockPanel.Dock="Right" Width="200" VerticalAlignment="Center" Margin="10,0,50,0">

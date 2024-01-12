@@ -2,7 +2,7 @@
 
 namespace KotaniAntViewer
 {
-	public class AppModel
+	public class MainViewModel
 	{
 		public const int Resolution = 20;
 		public const int n = 2;
@@ -21,7 +21,7 @@ namespace KotaniAntViewer
 		public Cell[] Cells { get; }
 		public ReactiveProperty<Cell> SelectedCell { get; } = new ReactiveProperty<Cell>();
 
-		public AppModel()
+		public MainViewModel()
 		{
 			Cells = Enumerable.Range(0, Size * Size)
 				.Select(v =>
@@ -56,6 +56,6 @@ namespace KotaniAntViewer
 		public double Min1 { get; set; }
 		public double Min2 { get; set; }
 
-		public string Color => AppModel.ToColor(Min - AppModel.n);
+		public string Color => MainViewModel.ToColor(Min - MainViewModel.n);
 	}
 }
