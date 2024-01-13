@@ -23,7 +23,12 @@ namespace KotaniAntViewer
 
 		private void Rectangle_MouseEnter(object sender, MouseEventArgs e)
 		{
-			((MainViewModel)DataContext).SelectedCell.Value = (Cell)((FrameworkElement)sender).DataContext;
+			var vm = (MainViewModel)DataContext;
+			var cell = vm.SelectedCell.Value;
+			if (cell != null) cell.UpdateSelected(false);
+			cell = (Cell)((FrameworkElement)sender).DataContext;
+			cell.UpdateSelected(true);
+			vm.SelectedCell.Value = cell;
 		}
 	}
 }

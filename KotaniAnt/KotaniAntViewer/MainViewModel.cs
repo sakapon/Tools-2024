@@ -4,18 +4,8 @@ namespace KotaniAntViewer
 {
 	public class MainViewModel
 	{
-		public const int Resolution = 20;
+		public const int Resolution = 50;
 		public const int n = 2;
-
-		static double d1(double x, double y) => Math.Sqrt(x * x + (n + y) * (n + y));
-		static double d2(double x, double y) => Math.Sqrt((n + 1 - x) * (n + 1 - x) + (1 + y) * (1 + y));
-
-		// 0 <= x < 1
-		public static string ToColor(double x)
-		{
-			var c = (int)(256 * Math.Clamp(x, 0, 0.999));
-			return $"#{c:X2}{c:X2}{c:X2}";
-		}
 
 		public int Size => Resolution + 1;
 		public Cell[] Cells { get; }
@@ -28,34 +18,59 @@ namespace KotaniAntViewer
 				{
 					var (i, j) = (v / Size, v % Size);
 					var (x, y) = ((double)j / Resolution, 1 - (double)i / Resolution);
-					return new Cell
-					{
-						Row = i,
-						Column = j,
-						X = x,
-						Y = y,
-						Min1 = x >= y ? d1(x, y) : d1(y, x),
-						Min2 = x >= y ? d2(x, y) : d2(y, x),
-					};
+					var cell = new Cell(i, j, x, y);
+					cell.Update(n);
+					return cell;
 				})
 				.ToArray();
 
-			SelectedCell.Value = Cells[0];
+			//SelectedCell.Value = Cells[0];
 		}
 	}
 
 	public class Cell
 	{
-		public int Row { get; set; }
-		public int Column { get; set; }
+		public int Row { get; }
+		public int Column { get; }
+		public double X { get; }
+		public double Y { get; }
 
-		public double X { get; set; }
-		public double Y { get; set; }
+		public Cell(int i, int j, double x, double y)
+		{
+			Row = i;
+			Column = j;
+			X = x;
+			Y = y;
+		}
 
-		public double Min => Min1 <= Min2 ? Min1 : Min2;
-		public double Min1 { get; set; }
-		public double Min2 { get; set; }
+		public bool IsSelected { get; private set; }
+		public ReactiveProperty<double> Distance { get; } = new ReactiveProperty<double>();
+		public double DistanceRate { get; private set; }
+		public ReactiveProperty<string> Color { get; } = new ReactiveProperty<string>();
 
-		public string Color => MainViewModel.ToColor(Min - MainViewModel.n);
+		public void Update(int n)
+		{
+			var Distance1 = X >= Y ? d1(n, X, Y) : d1(n, Y, X);
+			var Distance2 = X >= Y ? d2(n, X, Y) : d2(n, Y, X);
+			Distance.Value = Distance1 <= Distance2 ? Distance1 : Distance2;
+			DistanceRate = Distance.Value - n;
+			UpdateSelected(IsSelected);
+		}
+
+		public void UpdateSelected(bool isSelected)
+		{
+			IsSelected = isSelected;
+			Color.Value = isSelected ? "#6699CC" : ToColor(DistanceRate);
+		}
+
+		static double d1(int n, double x, double y) => Math.Sqrt(x * x + (n + y) * (n + y));
+		static double d2(int n, double x, double y) => Math.Sqrt((n + 1 - x) * (n + 1 - x) + (1 + y) * (1 + y));
+
+		// 0 <= x < 1
+		public static string ToColor(double x)
+		{
+			var c = (int)(256 * Math.Clamp(x, 0, 0.999));
+			return $"#{c:X2}{c:X2}{c:X2}";
+		}
 	}
 }

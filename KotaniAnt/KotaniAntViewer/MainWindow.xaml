@@ -9,7 +9,7 @@
         Title="Kotani's Ant Viewer" Height="600" Width="900" FontSize="20">
     <Window.Resources>
         <DataTemplate x:Key="CellTemplate">
-            <Rectangle Fill="{Binding Color}" MouseEnter="Rectangle_MouseEnter" Margin="0,0,-1,-1"/>
+            <Rectangle Fill="{Binding Color.Value}" MouseEnter="Rectangle_MouseEnter" Margin="0,0,-1,-1"/>
         </DataTemplate>
         <ItemsPanelTemplate x:Key="CellsTemplate">
             <UniformGrid Rows="{Binding Size}" Columns="{Binding Size}"/>
@@ -31,7 +31,7 @@
                 </Grid>
                 <Grid>
                     <TextBlock Text="Distance:"/>
-                    <TextBlock Text="{Binding Min, StringFormat=\{0:F3\}}" HorizontalAlignment="Right"/>
+                    <TextBlock Text="{Binding Distance.Value, StringFormat=\{0:F3\}}" HorizontalAlignment="Right"/>
                 </Grid>
             </StackPanel>
         </StackPanel>
