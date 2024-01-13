@@ -17,15 +17,15 @@
         <Style x:Key="CaptionLabelStyle" TargetType="{x:Type Label}">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Margin" Value="10,2,10,2"/>
         </Style>
         <Style x:Key="NumberTextBlockStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Margin" Value="10,2,10,2"/>
         </Style>
         <Style x:Key="NumberSliderStyle" TargetType="{x:Type Slider}">
-            <Setter Property="Margin" Value="10,-2,10,6"/>
+            <Setter Property="Margin" Value="10,2,10,8"/>
             <Setter Property="Minimum" Value="1"/>
             <Setter Property="Maximum" Value="30"/>
             <Setter Property="SmallChange" Value="1"/>
@@ -43,21 +43,23 @@
                 <TextBlock Style="{DynamicResource NumberTextBlockStyle}" Text="{Binding N.Value}"/>
             </Grid>
             <Slider Style="{DynamicResource NumberSliderStyle}" Value="{Binding N.Value}"/>
-            <StackPanel DataContext="{Binding SelectedCell.Value}">
+            <StackPanel DataContext="{Binding SelectedCell.Value}" Margin="0,30,0,0">
                 <Grid>
-                    <TextBlock Text="x:"/>
-                    <TextBlock Text="{Binding X, StringFormat=\{0:F3\}}" HorizontalAlignment="Right"/>
+                    <Label Style="{DynamicResource CaptionLabelStyle}" Content="x:"/>
+                    <TextBlock Style="{DynamicResource NumberTextBlockStyle}" Text="{Binding X, StringFormat=\{0:F3\}}"/>
                 </Grid>
                 <Grid>
-                    <TextBlock Text="y:"/>
-                    <TextBlock Text="{Binding Y, StringFormat=\{0:F3\}}" HorizontalAlignment="Right"/>
+                    <Label Style="{DynamicResource CaptionLabelStyle}" Content="y:"/>
+                    <TextBlock Style="{DynamicResource NumberTextBlockStyle}" Text="{Binding Y, StringFormat=\{0:F3\}}"/>
                 </Grid>
                 <Grid>
-                    <TextBlock Text="Distance:"/>
-                    <TextBlock Text="{Binding Distance.Value, StringFormat=\{0:F3\}}" HorizontalAlignment="Right"/>
+                    <Label Style="{DynamicResource CaptionLabelStyle}" Content="Distance:"/>
+                    <TextBlock Style="{DynamicResource NumberTextBlockStyle}" Text="{Binding Distance.Value, StringFormat=\{0:F3\}}"/>
                 </Grid>
             </StackPanel>
         </StackPanel>
-        <ItemsControl ItemsPanel="{DynamicResource CellsTemplate}" ItemTemplate="{DynamicResource CellTemplate}" ItemsSource="{Binding Cells}" Width="480" Height="480"/>
+        <Viewbox Margin="20,40,20,40">
+            <ItemsControl ItemsPanel="{DynamicResource CellsTemplate}" ItemTemplate="{DynamicResource CellTemplate}" ItemsSource="{Binding Cells}" Width="600" Height="600" BorderBrush="#FF333333" BorderThickness="1"/>
+        </Viewbox>
     </DockPanel>
 </Window>
