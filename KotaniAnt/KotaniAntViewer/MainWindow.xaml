@@ -14,12 +14,35 @@
         <ItemsPanelTemplate x:Key="CellsTemplate">
             <UniformGrid Rows="{Binding Size}" Columns="{Binding Size}"/>
         </ItemsPanelTemplate>
+        <Style x:Key="CaptionLabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        <Style x:Key="NumberTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        <Style x:Key="NumberSliderStyle" TargetType="{x:Type Slider}">
+            <Setter Property="Margin" Value="10,-2,10,6"/>
+            <Setter Property="Minimum" Value="1"/>
+            <Setter Property="Maximum" Value="50"/>
+            <Setter Property="SmallChange" Value="1"/>
+            <Setter Property="LargeChange" Value="10"/>
+            <Setter Property="IsMoveToPointEnabled" Value="True"/>
+        </Style>
     </Window.Resources>
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
     <DockPanel>
         <StackPanel DockPanel.Dock="Right" Width="200" VerticalAlignment="Center" Margin="10,0,50,0">
+            <Grid>
+                <Label Style="{DynamicResource CaptionLabelStyle}" Content="n:"/>
+                <TextBlock Style="{DynamicResource NumberTextBlockStyle}" Text="{Binding N.Value}"/>
+            </Grid>
+            <Slider Style="{DynamicResource NumberSliderStyle}" Value="{Binding N.Value}"/>
             <StackPanel DataContext="{Binding SelectedCell.Value}">
                 <Grid>
                     <TextBlock Text="x:"/>

@@ -5,9 +5,9 @@ namespace KotaniAntViewer
 	public class MainViewModel
 	{
 		public const int Resolution = 50;
-		public const int n = 2;
 
 		public int Size => Resolution + 1;
+		public ReactiveProperty<int> N { get; } = new ReactiveProperty<int>(2);
 		public Cell[] Cells { get; }
 		public ReactiveProperty<Cell> SelectedCell { get; } = new ReactiveProperty<Cell>();
 
@@ -19,10 +19,12 @@ namespace KotaniAntViewer
 					var (i, j) = (v / Size, v % Size);
 					var (x, y) = ((double)j / Resolution, 1 - (double)i / Resolution);
 					var cell = new Cell(i, j, x, y);
-					cell.Update(n);
+					cell.Update(N.Value);
 					return cell;
 				})
 				.ToArray();
+
+			N.Subscribe(n => Array.ForEach(Cells, cell => cell.Update(n)));
 
 			//SelectedCell.Value = Cells[0];
 		}
