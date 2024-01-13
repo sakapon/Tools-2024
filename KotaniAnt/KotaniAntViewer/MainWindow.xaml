@@ -27,7 +27,7 @@
         <Style x:Key="NumberSliderStyle" TargetType="{x:Type Slider}">
             <Setter Property="Margin" Value="10,-2,10,6"/>
             <Setter Property="Minimum" Value="1"/>
-            <Setter Property="Maximum" Value="50"/>
+            <Setter Property="Maximum" Value="30"/>
             <Setter Property="SmallChange" Value="1"/>
             <Setter Property="LargeChange" Value="10"/>
             <Setter Property="IsMoveToPointEnabled" Value="True"/>

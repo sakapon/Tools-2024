@@ -5,6 +5,7 @@ namespace KotaniAntViewer
 	public class MainViewModel
 	{
 		public const int Resolution = 50;
+		public static readonly double[] Maxes = Enumerable.Range(0, 101).Select(n => Math.Sqrt(2 * (2L * n * n * n * n + 2L * n * n * n + 3L * n * n + 2 * n + 1)) / (2 * n)).ToArray();
 
 		public int Size => Resolution + 1;
 		public ReactiveProperty<int> N { get; } = new ReactiveProperty<int>(2);
@@ -55,7 +56,7 @@ namespace KotaniAntViewer
 			var Distance1 = X >= Y ? d1(n, X, Y) : d1(n, Y, X);
 			var Distance2 = X >= Y ? d2(n, X, Y) : d2(n, Y, X);
 			Distance.Value = Distance1 <= Distance2 ? Distance1 : Distance2;
-			DistanceRate = Distance.Value - n;
+			DistanceRate = (Distance.Value - n) / (MainViewModel.Maxes[n] - n);
 			UpdateSelected(IsSelected);
 		}
 
