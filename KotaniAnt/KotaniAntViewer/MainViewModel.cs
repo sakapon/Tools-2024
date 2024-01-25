@@ -1,4 +1,6 @@
-﻿using Reactive.Bindings;
+﻿using System.Reactive.Concurrency;
+using System.Reactive.Linq;
+using Reactive.Bindings;
 
 namespace KotaniAntViewer
 {
@@ -25,8 +27,12 @@ namespace KotaniAntViewer
 				})
 				.ToArray();
 
-			N.Subscribe(n => Array.ForEach(Cells, cell => cell.Update(n)));
+			N
+				.Throttle(TimeSpan.FromMilliseconds(100))
+				.ObserveOn(ThreadPoolScheduler.Instance)
+				.Subscribe(n => Array.ForEach(Cells, cell => cell.Update(n)));
 
+			// For design.
 			//SelectedCell.Value = Cells[0];
 		}
 	}
