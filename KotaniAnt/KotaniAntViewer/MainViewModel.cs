@@ -6,7 +6,7 @@ namespace KotaniAntViewer
 {
 	public class MainViewModel
 	{
-		public const int Resolution = 50;
+		public const int Resolution = 80;
 		public static readonly double[] Maxes = Enumerable.Range(0, 101).Select(n => Math.Sqrt(2 * (2L * n * n * n * n + 2L * n * n * n + 3L * n * n + 2 * n + 1)) / (2 * n)).ToArray();
 
 		public int Size => Resolution + 1;

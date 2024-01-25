@@ -36,13 +36,15 @@
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Right" Width="200" VerticalAlignment="Center" Margin="10,0,50,0">
-            <Grid>
-                <Label Style="{DynamicResource CaptionLabelStyle}" Content="n:"/>
-                <TextBlock Style="{DynamicResource NumberTextBlockStyle}" Text="{Binding N.Value}"/>
-            </Grid>
-            <Slider Style="{DynamicResource NumberSliderStyle}" Value="{Binding N.Value}"/>
+    <DockPanel HorizontalAlignment="Center">
+        <StackPanel DockPanel.Dock="Right" Width="200" VerticalAlignment="Center" Margin="10,0,10,0">
+            <StackPanel>
+                <Grid>
+                    <Label Style="{DynamicResource CaptionLabelStyle}" Content="n:"/>
+                    <TextBlock Style="{DynamicResource NumberTextBlockStyle}" Text="{Binding N.Value}"/>
+                </Grid>
+                <Slider Style="{DynamicResource NumberSliderStyle}" Value="{Binding N.Value}"/>
+            </StackPanel>
             <StackPanel DataContext="{Binding SelectedCell.Value}" Margin="0,30,0,0">
                 <Grid>
                     <Label Style="{DynamicResource CaptionLabelStyle}" Content="x:"/>
