@@ -23,7 +23,8 @@ namespace BfsDfsViewer
 
 		void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			Task.Run(() => ((MainViewModel)DataContext).Execute());
+			var vm = (MainViewModel)DataContext;
+			Task.Run(() => vm.Execute());
 		}
 	}
 }

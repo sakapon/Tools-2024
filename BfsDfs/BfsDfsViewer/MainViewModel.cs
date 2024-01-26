@@ -23,6 +23,8 @@ namespace BfsDfsViewer
 	public class BFS
 	{
 		readonly int h, w;
+		public int Height => h;
+		public int Width => w;
 		public Cell[] Cells { get; }
 
 		public BFS(int h, int w)
