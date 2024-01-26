@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:BfsDfsViewer"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="BFS DFS Viewer" Height="600" Width="900">
+        Title="BFS DFS Viewer" Height="600" Width="900" Loaded="Window_Loaded">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
     <Grid>
 
     </Grid>

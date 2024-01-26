@@ -20,5 +20,10 @@ namespace BfsDfsViewer
 		{
 			InitializeComponent();
 		}
+
+		void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			Task.Run(() => ((MainViewModel)DataContext).Execute());
+		}
 	}
 }
