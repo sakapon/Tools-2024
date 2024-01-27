@@ -24,14 +24,14 @@ namespace BfsDfsViewer
 
 		public void Execute(int sv)
 		{
-			Thread.Sleep(MainViewModel.TimeInterval);
+			Thread.Sleep(MainViewModel.Time_Start);
 
 			var q = new Queue<int>();
 			Cells[sv].Cost.Value = 0;
 			q.Enqueue(sv);
 
 			Cells[sv].Color.Value = MainViewModel.Color_Queued;
-			Thread.Sleep(MainViewModel.TimeInterval);
+			Thread.Sleep(MainViewModel.Time_Interval);
 
 			while (q.Count > 0)
 			{
@@ -48,11 +48,11 @@ namespace BfsDfsViewer
 					q.Enqueue(nv);
 
 					Cells[nv].Color.Value = MainViewModel.Color_Queued;
-					Thread.Sleep(MainViewModel.TimeInterval);
+					Thread.Sleep(MainViewModel.Time_Interval);
 				}
 
 				Cells[v].Color.Value = MainViewModel.Color_End;
-				Thread.Sleep(MainViewModel.TimeInterval);
+				Thread.Sleep(MainViewModel.Time_Interval);
 			}
 		}
 
@@ -82,14 +82,14 @@ namespace BfsDfsViewer
 
 		public void Execute(int sv)
 		{
-			Thread.Sleep(MainViewModel.TimeInterval);
+			Thread.Sleep(MainViewModel.Time_Start);
 
 			var q = new Stack<int>();
 			Cells[sv].Cost.Value = 0;
 			q.Push(sv);
 
 			Cells[sv].Color.Value = MainViewModel.Color_Queued;
-			Thread.Sleep(MainViewModel.TimeInterval);
+			Thread.Sleep(MainViewModel.Time_Interval);
 
 			while (q.Count > 0)
 			{
@@ -106,11 +106,11 @@ namespace BfsDfsViewer
 					q.Push(nv);
 
 					Cells[nv].Color.Value = MainViewModel.Color_Queued;
-					Thread.Sleep(MainViewModel.TimeInterval);
+					Thread.Sleep(MainViewModel.Time_Interval);
 				}
 
 				Cells[v].Color.Value = MainViewModel.Color_End;
-				Thread.Sleep(MainViewModel.TimeInterval);
+				Thread.Sleep(MainViewModel.Time_Interval);
 			}
 		}
 
@@ -140,7 +140,7 @@ namespace BfsDfsViewer
 
 		public void Execute(int sv)
 		{
-			Thread.Sleep(MainViewModel.TimeInterval);
+			Thread.Sleep(MainViewModel.Time_Start);
 
 			Cells[sv].Cost.Value = 0;
 			DFS(sv);
@@ -150,7 +150,7 @@ namespace BfsDfsViewer
 				var nc = Cells[v].Cost.Value + 1;
 
 				Cells[v].Color.Value = MainViewModel.Color_Current;
-				Thread.Sleep(MainViewModel.TimeInterval);
+				Thread.Sleep(MainViewModel.Time_Interval);
 
 				foreach (var nv in GetNexts(v))
 				{
@@ -160,7 +160,7 @@ namespace BfsDfsViewer
 				}
 
 				Cells[v].Color.Value = MainViewModel.Color_End;
-				Thread.Sleep(MainViewModel.TimeInterval);
+				Thread.Sleep(MainViewModel.Time_Interval);
 			}
 		}
 

@@ -5,7 +5,9 @@
 		public const int Height = 9;
 		public const int Width = 13;
 		public const int StartId = Height * Width / 2;
-		public const int TimeInterval = 100;
+
+		public const int Time_Start = 1000;
+		public const int Time_Interval = 100;
 
 		public const string Color_Current = "#FF3333";
 		public const string Color_Queued = "#FF9933";
