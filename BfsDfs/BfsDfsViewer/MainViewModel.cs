@@ -2,8 +2,8 @@
 {
 	public class MainViewModel
 	{
-		public const int Height = 11;
-		public const int Width = 15;
+		public const int Height = 9;
+		public const int Width = 13;
 		public const int StartId = Height * Width / 2;
 		public const int TimeInterval = 100;
 
