@@ -19,6 +19,12 @@
 
 		public MainViewModel()
 		{
+			// For design.
+			//Start();
+		}
+
+		public void Start()
+		{
 			Task.Run(() => QueueBFS.Execute(StartId));
 			Task.Run(() => StackDFS.Execute(StartId));
 			Task.Run(() => RecursiveDFS.Execute(StartId));

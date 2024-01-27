@@ -22,8 +22,19 @@ namespace BfsDfsViewer
 			Cells = Array.ConvertAll(new bool[h * w], _ => new Cell());
 		}
 
-		public abstract void Execute(int sv);
+		public void Execute(int sv)
+		{
+			Array.ForEach(Cells, c =>
+			{
+				c.Cost.Value = null;
+				c.Color.Value = null;
+			});
+			Thread.Sleep(MainViewModel.Time_Start);
 
+			Execute0(sv);
+		}
+
+		protected abstract void Execute0(int sv);
 		protected IEnumerable<int> GetNexts(int v)
 		{
 			var (i, j) = (v / w, v % w);
@@ -38,10 +49,8 @@ namespace BfsDfsViewer
 	{
 		public QueueBFS(int h, int w) : base(h, w) { }
 
-		public override void Execute(int sv)
+		protected override void Execute0(int sv)
 		{
-			Thread.Sleep(MainViewModel.Time_Start);
-
 			var q = new Queue<int>();
 			Cells[sv].Cost.Value = 0;
 			q.Enqueue(sv);
@@ -77,10 +86,8 @@ namespace BfsDfsViewer
 	{
 		public StackDFS(int h, int w) : base(h, w) { }
 
-		public override void Execute(int sv)
+		protected override void Execute0(int sv)
 		{
-			Thread.Sleep(MainViewModel.Time_Start);
-
 			var q = new Stack<int>();
 			Cells[sv].Cost.Value = 0;
 			q.Push(sv);
@@ -116,10 +123,8 @@ namespace BfsDfsViewer
 	{
 		public RecursiveDFS(int h, int w) : base(h, w) { }
 
-		public override void Execute(int sv)
+		protected override void Execute0(int sv)
 		{
-			Thread.Sleep(MainViewModel.Time_Start);
-
 			Cells[sv].Cost.Value = 0;
 			DFS(sv);
 
