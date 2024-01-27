@@ -8,21 +8,37 @@ namespace BfsDfsViewer
 		public ReactiveProperty<string> Color { get; } = new ReactiveProperty<string>();
 	}
 
-	public class QueueBFS
+	public abstract class GridSearchBase
 	{
 		readonly int h, w;
 		public int Height => h;
 		public int Width => w;
 		public Cell[] Cells { get; }
 
-		public QueueBFS(int h, int w)
+		public GridSearchBase(int h, int w)
 		{
 			this.h = h;
 			this.w = w;
 			Cells = Array.ConvertAll(new bool[h * w], _ => new Cell());
 		}
 
-		public void Execute(int sv)
+		public abstract void Execute(int sv);
+
+		protected IEnumerable<int> GetNexts(int v)
+		{
+			var (i, j) = (v / w, v % w);
+			if (j > 0) yield return v - 1;
+			if (j + 1 < w) yield return v + 1;
+			if (i > 0) yield return v - w;
+			if (i + 1 < h) yield return v + w;
+		}
+	}
+
+	public class QueueBFS : GridSearchBase
+	{
+		public QueueBFS(int h, int w) : base(h, w) { }
+
+		public override void Execute(int sv)
 		{
 			Thread.Sleep(MainViewModel.Time_Start);
 
@@ -55,32 +71,13 @@ namespace BfsDfsViewer
 				Thread.Sleep(MainViewModel.Time_Interval);
 			}
 		}
-
-		IEnumerable<int> GetNexts(int v)
-		{
-			var (i, j) = (v / w, v % w);
-			if (j > 0) yield return v - 1;
-			if (j + 1 < w) yield return v + 1;
-			if (i > 0) yield return v - w;
-			if (i + 1 < h) yield return v + w;
-		}
 	}
 
-	public class StackDFS
+	public class StackDFS : GridSearchBase
 	{
-		readonly int h, w;
-		public int Height => h;
-		public int Width => w;
-		public Cell[] Cells { get; }
+		public StackDFS(int h, int w) : base(h, w) { }
 
-		public StackDFS(int h, int w)
-		{
-			this.h = h;
-			this.w = w;
-			Cells = Array.ConvertAll(new bool[h * w], _ => new Cell());
-		}
-
-		public void Execute(int sv)
+		public override void Execute(int sv)
 		{
 			Thread.Sleep(MainViewModel.Time_Start);
 
@@ -113,32 +110,13 @@ namespace BfsDfsViewer
 				Thread.Sleep(MainViewModel.Time_Interval);
 			}
 		}
-
-		IEnumerable<int> GetNexts(int v)
-		{
-			var (i, j) = (v / w, v % w);
-			if (j > 0) yield return v - 1;
-			if (j + 1 < w) yield return v + 1;
-			if (i > 0) yield return v - w;
-			if (i + 1 < h) yield return v + w;
-		}
 	}
 
-	public class RecursiveDFS
+	public class RecursiveDFS : GridSearchBase
 	{
-		readonly int h, w;
-		public int Height => h;
-		public int Width => w;
-		public Cell[] Cells { get; }
+		public RecursiveDFS(int h, int w) : base(h, w) { }
 
-		public RecursiveDFS(int h, int w)
-		{
-			this.h = h;
-			this.w = w;
-			Cells = Array.ConvertAll(new bool[h * w], _ => new Cell());
-		}
-
-		public void Execute(int sv)
+		public override void Execute(int sv)
 		{
 			Thread.Sleep(MainViewModel.Time_Start);
 
@@ -162,15 +140,6 @@ namespace BfsDfsViewer
 				Cells[v].Color.Value = MainViewModel.Color_End;
 				Thread.Sleep(MainViewModel.Time_Interval);
 			}
-		}
-
-		IEnumerable<int> GetNexts(int v)
-		{
-			var (i, j) = (v / w, v % w);
-			if (j > 0) yield return v - 1;
-			if (j + 1 < w) yield return v + 1;
-			if (i > 0) yield return v - w;
-			if (i + 1 < h) yield return v + w;
 		}
 	}
 }

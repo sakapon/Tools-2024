@@ -13,9 +13,9 @@
 		public const string Color_Queued = "#FF9933";
 		public const string Color_End = "#33AA33";
 
-		public QueueBFS QueueBFS { get; } = new QueueBFS(Height, Width);
-		public StackDFS StackDFS { get; } = new StackDFS(Height, Width);
-		public RecursiveDFS RecursiveDFS { get; } = new RecursiveDFS(Height, Width);
+		public GridSearchBase QueueBFS { get; } = new QueueBFS(Height, Width);
+		public GridSearchBase StackDFS { get; } = new StackDFS(Height, Width);
+		public GridSearchBase RecursiveDFS { get; } = new RecursiveDFS(Height, Width);
 
 		public MainViewModel()
 		{
