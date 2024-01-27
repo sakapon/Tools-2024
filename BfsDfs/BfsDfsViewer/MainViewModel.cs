@@ -13,15 +13,13 @@
 
 		public QueueBFS QueueBFS { get; } = new QueueBFS(Height, Width);
 		public StackDFS StackDFS { get; } = new StackDFS(Height, Width);
+		public RecursiveDFS RecursiveDFS { get; } = new RecursiveDFS(Height, Width);
 
 		public MainViewModel()
 		{
-			Task.Run(() => Execute());
-		}
-
-		public void Execute()
-		{
-			QueueBFS.Execute(StartId);
+			Task.Run(() => QueueBFS.Execute(StartId));
+			Task.Run(() => StackDFS.Execute(StartId));
+			Task.Run(() => RecursiveDFS.Execute(StartId));
 		}
 	}
 }
