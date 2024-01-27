@@ -22,7 +22,7 @@
     </Window.DataContext>
     <Grid>
         <Viewbox Margin="20,40,20,40">
-            <ItemsControl ItemsPanel="{DynamicResource CellsTemplate}" ItemTemplate="{DynamicResource CellTemplate}" DataContext="{Binding BFS}" ItemsSource="{Binding Cells}" BorderBrush="#FF333333" BorderThickness="1" Padding="1"/>
+            <ItemsControl ItemsPanel="{DynamicResource CellsTemplate}" ItemTemplate="{DynamicResource CellTemplate}" DataContext="{Binding QueueBFS}" ItemsSource="{Binding Cells}" BorderBrush="#FF333333" BorderThickness="1" Padding="1"/>
         </Viewbox>
     </Grid>
 </Window>
