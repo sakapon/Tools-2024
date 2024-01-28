@@ -31,11 +31,16 @@ namespace BfsDfsViewer
 		{
 			IsReady.Value = false;
 
-			Task.Run(() => QueueBFS.Execute(StartId));
-			Task.Run(() => StackDFS.Execute(StartId));
-			Task.Run(() => RecursiveDFS.Execute(StartId));
+			Task.Run(() =>
+			{
+				Task.WaitAll(
+					Task.Run(() => QueueBFS.Execute(StartId)),
+					Task.Run(() => StackDFS.Execute(StartId)),
+					Task.Run(() => RecursiveDFS.Execute(StartId))
+				);
 
-			IsReady.Value = true;
+				IsReady.Value = true;
+			});
 		}
 	}
 }
