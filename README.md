@@ -9,3 +9,5 @@ cf. https://www.youtube.com/watch?v=W8Lo4SIgukI
 
 ## BFS DFS Viewer
 Visualizes BFS (Queue), DFS (Stack), and DFS (Recursion).
+
+![](Images/BfsDfs/BfsDfsViewer-1.0.3-Rotation.gif)
