@@ -5,7 +5,7 @@ namespace BfsDfsViewer
 	public class Cell
 	{
 		public ReactiveProperty<int?> Cost { get; } = new ReactiveProperty<int?>();
-		public ReactiveProperty<string> Color { get; } = new ReactiveProperty<string>();
+		public ReactiveProperty<string> Color { get; } = new ReactiveProperty<string>("");
 	}
 
 	public abstract class GridSearchBase
@@ -27,7 +27,7 @@ namespace BfsDfsViewer
 			Array.ForEach(Cells, c =>
 			{
 				c.Cost.Value = null;
-				c.Color.Value = null;
+				c.Color.Value = "";
 			});
 			Thread.Sleep(MainViewModel.Time_Start);
 
@@ -39,8 +39,8 @@ namespace BfsDfsViewer
 		{
 			var (i, j) = (v / w, v % w);
 			if (j > 0) yield return v - 1;
-			if (j + 1 < w) yield return v + 1;
 			if (i > 0) yield return v - w;
+			if (j + 1 < w) yield return v + 1;
 			if (i + 1 < h) yield return v + w;
 		}
 	}

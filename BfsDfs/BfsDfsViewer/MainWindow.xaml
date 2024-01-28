@@ -25,7 +25,7 @@
             <ItemsControl ItemsPanel="{DynamicResource CellsTemplate}" ItemTemplate="{DynamicResource CellTemplate}" DataContext="{Binding QueueBFS}" ItemsSource="{Binding Cells}" BorderBrush="#FF333333" BorderThickness="1" Padding="1"/>
         </Viewbox>
         <DockPanel LastChildFill="False">
-            <Button Content="Start" Width="160" Height="36" Margin="20" DockPanel.Dock="Top">
+            <Button Content="Start" Width="160" Height="36" Margin="20" DockPanel.Dock="Top" IsEnabled="{Binding IsReady.Value}">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="Click">
                         <b:CallMethodAction TargetObject="{Binding}" MethodName="Start"/>
