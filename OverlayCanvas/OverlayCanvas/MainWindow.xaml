@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OverlayCanvas"
         mc:Ignorable="d"
-        Title="Overlay Canvas" Height="450" Width="800" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" WindowState="Maximized">
+        Title="Overlay Canvas" Height="600" Width="900" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" WindowState="Maximized">
     <Grid>
-        <InkCanvas x:Name="TheCanvas" Background="#06FFFFFF"/>
+        <InkCanvas x:Name="TheCanvas" Background="#09FFFFFF"/>
     </Grid>
 </Window>
