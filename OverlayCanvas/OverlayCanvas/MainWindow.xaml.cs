@@ -19,6 +19,17 @@ namespace OverlayCanvas
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			MouseDoubleClick += (o, e) => TheCanvas.Strokes.Clear();
+			MouseRightButtonUp += (o, e) => Close();
+
+			Loaded += (o, e) =>
+			{
+				var att = TheCanvas.DefaultDrawingAttributes;
+				att.Width = 5;
+				att.Height = 5;
+				att.Color = Color.FromRgb(238, 51, 51);
+			};
 		}
 	}
 }
