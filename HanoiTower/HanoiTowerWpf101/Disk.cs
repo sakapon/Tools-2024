@@ -9,6 +9,7 @@ namespace HanoiTowerWpf101
 		public ReactiveProperty<int> TowerId { get; }
 		public ReactiveProperty<int> Index { get; }
 
+		public int Width => Id * 20;
 		public ReadOnlyReactiveProperty<int> Left { get; }
 		public ReadOnlyReactiveProperty<int> Top { get; }
 
@@ -18,8 +19,8 @@ namespace HanoiTowerWpf101
 			TowerId = new ReactiveProperty<int>(towerId);
 			Index = new ReactiveProperty<int>(index);
 
-			Left = TowerId.Select(x => x * 100).ToReadOnlyReactiveProperty();
-			Top = Index.Select(x => x * 20).ToReadOnlyReactiveProperty();
+			Left = TowerId.Select(x => x * 200).ToReadOnlyReactiveProperty();
+			Top = Index.Select(x => x * 25).ToReadOnlyReactiveProperty();
 		}
 	}
 }
