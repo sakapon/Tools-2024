@@ -8,7 +8,7 @@
 
 		static readonly Stack<Disk>[] Towers =
 		[
-			new Stack<Disk>(Enumerable.Range(1, NumberOfDisks).Reverse().Select(id => new Disk(id, 0, NumberOfDisks - id))),
+			new Stack<Disk>(Enumerable.Range(1, NumberOfDisks).Reverse().Select((id, index) => new Disk(id, 0, index))),
 			new Stack<Disk>(),
 			new Stack<Disk>(),
 		];
