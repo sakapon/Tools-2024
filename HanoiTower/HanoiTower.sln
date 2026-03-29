@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HanoiTowerConsole", "HanoiT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HanoiTowerWpf101", "HanoiTowerWpf101\HanoiTowerWpf101.csproj", "{896FE211-3E99-4237-BE02-C75A96E22451}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HanoiTowerWpf102", "HanoiTowerWpf102\HanoiTowerWpf102.csproj", "{66CF5FBF-1BDB-42CB-A9EB-DD2A354A03C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{896FE211-3E99-4237-BE02-C75A96E22451}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{896FE211-3E99-4237-BE02-C75A96E22451}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{896FE211-3E99-4237-BE02-C75A96E22451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66CF5FBF-1BDB-42CB-A9EB-DD2A354A03C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66CF5FBF-1BDB-42CB-A9EB-DD2A354A03C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66CF5FBF-1BDB-42CB-A9EB-DD2A354A03C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66CF5FBF-1BDB-42CB-A9EB-DD2A354A03C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
