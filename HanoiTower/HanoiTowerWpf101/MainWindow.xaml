@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HanoiTowerWpf101"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Hanoi Tower" Height="600" Width="900">
+    <Window.Resources>
+        <ItemsPanelTemplate x:Key="DisksTemplate">
+            <Canvas/>
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="DiskTemplate">
+            <Rectangle Width="{Binding Width}" Height="20" Fill="#FFFF9933" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding Left.Value}" Y="{Binding Top.Value}"/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+        </DataTemplate>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:AppModel/>
+    </Window.DataContext>
     <Grid>
-
+        <ItemsControl ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Disks}" RenderTransformOrigin="0.5,0.5" Margin="20">
+            <ItemsControl.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                </TransformGroup>
+            </ItemsControl.RenderTransform>
+        </ItemsControl>
     </Grid>
 </Window>
