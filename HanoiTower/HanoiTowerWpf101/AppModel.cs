@@ -1,4 +1,6 @@
-﻿namespace HanoiTowerWpf101
+﻿using Reactive.Bindings;
+
+namespace HanoiTowerWpf101
 {
 	public class AppModel
 	{
@@ -12,6 +14,7 @@
 		];
 
 		public Disk[] Disks { get; }
+		public ReactiveProperty<int> Count { get; } = new ReactiveProperty<int>(0);
 
 		public AppModel()
 		{
@@ -34,6 +37,7 @@
 			disk.TowerId.Value = to;
 			disk.Index.Value = Towers[to].Count;
 			Towers[to].Push(disk);
+			Count.Value++;
 		}
 	}
 }

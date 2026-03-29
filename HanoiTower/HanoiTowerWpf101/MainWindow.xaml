@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HanoiTowerWpf101"
         mc:Ignorable="d"
-        Title="Hanoi Tower" Height="600" Width="900">
+        Title="Hanoi Tower" Height="600" Width="900" FontSize="24">
     <Window.Resources>
         <ItemsPanelTemplate x:Key="DisksTemplate">
             <Grid/>
@@ -31,5 +31,6 @@
                 </TransformGroup>
             </ItemsControl.RenderTransform>
         </ItemsControl>
+        <TextBlock Text="{Binding Count.Value}" Margin="20"/>
     </Grid>
 </Window>
