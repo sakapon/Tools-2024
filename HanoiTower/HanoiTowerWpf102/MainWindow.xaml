@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HanoiTowerWpf102"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Hanoi Tower" Height="600" Width="900" FontSize="24">
+    <Window.Resources>
+        <ItemsPanelTemplate x:Key="TowersTemplate">
+            <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="TowerTemplate">
+            <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DiskTemplate}" Width="200" Margin="20"/>
+        </DataTemplate>
+        <DataTemplate x:Key="DiskTemplate">
+            <Rectangle Width="{Binding Width}" Height="20" Fill="#FFFF9933"/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-
+        <Grid.DataContext>
+            <local:AppModel/>
+        </Grid.DataContext>
+        <ItemsControl ItemsSource="{Binding Towers}" ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource TowersTemplate}" RenderTransformOrigin="0.5,0.5">
+            <ItemsControl.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                </TransformGroup>
+            </ItemsControl.RenderTransform>
+        </ItemsControl>
+        <TextBlock Text="{Binding Count.Value}" Margin="20"/>
     </Grid>
 </Window>
