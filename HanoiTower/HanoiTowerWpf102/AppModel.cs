@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using Reactive.Bindings;
+﻿using Reactive.Bindings;
 
 namespace HanoiTowerWpf102
 {
@@ -7,7 +6,7 @@ namespace HanoiTowerWpf102
 	{
 		const int NumberOfDisks = 5;
 
-		public ObservableCollection<Disk>[] Towers { get; } =
+		public ReactiveCollection<Disk>[] Towers { get; } =
 		[
 			[.. Enumerable.Range(1, NumberOfDisks).Reverse().Select(id => new Disk(id))],
 			[],
@@ -33,8 +32,8 @@ namespace HanoiTowerWpf102
 		{
 			Thread.Sleep(300);
 			var disk = Towers[from].Last();
-			Towers[from].RemoveAt(Towers[from].Count - 1);
-			Towers[to].Add(disk);
+			Towers[from].RemoveAtOnScheduler(Towers[from].Count - 1);
+			Towers[to].AddOnScheduler(disk);
 			Count.Value++;
 		}
 	}
