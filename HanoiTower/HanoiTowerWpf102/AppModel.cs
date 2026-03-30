@@ -37,4 +37,10 @@ namespace HanoiTowerWpf102
 			Count.Value++;
 		}
 	}
+
+	public class Disk(int id)
+	{
+		public int Id { get; } = id;
+		public int Width => Id * 30 + 10;
+	}
 }
