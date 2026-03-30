@@ -14,7 +14,7 @@
             <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DiskTemplate}" Width="280"/>
         </DataTemplate>
         <DataTemplate x:Key="DiskTemplate">
-            <Rectangle Width="{Binding Width}" Height="30" Fill="#FFFF9933"/>
+            <Rectangle Width="{Binding Width}" Height="30" Fill="#FFFF9933" Margin="1"/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
