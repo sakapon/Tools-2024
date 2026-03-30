@@ -1,13 +1,8 @@
 ﻿namespace HanoiTowerWpf102
 {
-	public class Disk
+	public class Disk(int id)
 	{
-		public int Id { get; }
-		public int Width => Id * 20;
-
-		public Disk(int id)
-		{
-			Id = id;
-		}
+		public int Id { get; } = id;
+		public int Width => Id * 30 + 10;
 	}
 }

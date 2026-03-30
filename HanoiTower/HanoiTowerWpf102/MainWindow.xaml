@@ -11,23 +11,23 @@
             <StackPanel Orientation="Horizontal"/>
         </ItemsPanelTemplate>
         <DataTemplate x:Key="TowerTemplate">
-            <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DiskTemplate}" Width="200" Margin="20"/>
+            <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DiskTemplate}" Width="280"/>
         </DataTemplate>
         <DataTemplate x:Key="DiskTemplate">
-            <Rectangle Width="{Binding Width}" Height="20" Fill="#FFFF9933"/>
+            <Rectangle Width="{Binding Width}" Height="30" Fill="#FFFF9933"/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.DataContext>
             <local:AppModel/>
         </Grid.DataContext>
-        <ItemsControl ItemsSource="{Binding Towers}" ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource TowersTemplate}" RenderTransformOrigin="0.5,0.5">
+        <ItemsControl ItemsSource="{Binding Towers}" ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource TowersTemplate}" Margin="30" RenderTransformOrigin="0.5,0.5">
             <ItemsControl.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1"/>
                 </TransformGroup>
             </ItemsControl.RenderTransform>
         </ItemsControl>
-        <TextBlock Text="{Binding Count.Value}" Margin="20"/>
+        <TextBlock Text="{Binding Count.Value}" Margin="30"/>
     </Grid>
 </Window>
