@@ -1,4 +1,5 @@
 ﻿using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using Reactive.Bindings;
 
 namespace HanoiTowerWpf
@@ -11,6 +12,8 @@ namespace HanoiTowerWpf
 
 		public int Width => Id * 30 + 10;
 		public ReadOnlyReactiveProperty<int> DeltaY { get; }
+
+		public Subject<(double X, double Y)> MovedEvent { get; } = new Subject<(double, double)>();
 
 		public Disk(int id, Tower tower, int index)
 		{

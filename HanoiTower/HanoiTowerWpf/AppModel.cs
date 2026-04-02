@@ -32,8 +32,13 @@ namespace HanoiTowerWpf
 		{
 			Thread.Sleep(500);
 			var disk = Towers[from].Disks.Pop();
+			var (oldX, oldY) = (disk.Tower.Value.DeltaX.Value, disk.Tower.Value.DeltaY.Value + disk.DeltaY.Value);
+
 			disk.Tower.Value = Towers[to];
 			disk.IndexInTower.Value = Towers[to].Disks.Count;
+			var (newX, newY) = (disk.Tower.Value.DeltaX.Value, disk.Tower.Value.DeltaY.Value + disk.DeltaY.Value);
+
+			disk.MovedEvent.OnNext((oldX - newX, oldY - newY));
 			Towers[to].Disks.Push(disk);
 			Count.Value++;
 		}
