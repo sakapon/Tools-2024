@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace HanoiTowerWpf101
+namespace HanoiTowerWpf
 {
 	/// <summary>
 	/// Interaction logic for App.xaml

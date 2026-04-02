@@ -1,6 +1,6 @@
 ﻿using Reactive.Bindings;
 
-namespace HanoiTowerWpf101
+namespace HanoiTowerWpf
 {
 	public class AppModel
 	{

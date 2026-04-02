@@ -1,7 +1,7 @@
 ﻿using System.Reactive.Linq;
 using Reactive.Bindings;
 
-namespace HanoiTowerWpf101
+namespace HanoiTowerWpf
 {
 	public class Disk
 	{
