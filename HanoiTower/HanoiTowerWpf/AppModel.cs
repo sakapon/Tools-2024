@@ -30,7 +30,7 @@ namespace HanoiTowerWpf
 
 		void MoveDisk(int from, int to)
 		{
-			Thread.Sleep(500);
+			Thread.Sleep(400);
 			var disk = Towers[from].Disks.Pop();
 			var (oldX, oldY) = (disk.Tower.Value.DeltaX.Value, disk.Tower.Value.DeltaY.Value + disk.DeltaY.Value);
 

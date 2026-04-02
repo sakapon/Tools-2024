@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HanoiTowerWpf"
         mc:Ignorable="d"
-        Title="Hanoi Tower" Height="420" Width="900" FontSize="24">
+        Title="Hanoi Tower" Height="420" Width="900" FontSize="30">
     <Window.Resources>
         <ItemsPanelTemplate x:Key="DisksTemplate">
             <Grid/>
@@ -15,7 +15,7 @@
                 <Storyboard x:Key="MovedStoryboard">
                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MovedTransform" Storyboard.TargetProperty="X">
                         <EasingDoubleKeyFrame KeyTime="00:00:00"/>
-                        <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value="0">
+                        <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="0">
                             <EasingDoubleKeyFrame.EasingFunction>
                                 <CubicEase EasingMode="EaseOut"/>
                             </EasingDoubleKeyFrame.EasingFunction>
@@ -23,7 +23,7 @@
                     </DoubleAnimationUsingKeyFrames>
                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MovedTransform" Storyboard.TargetProperty="Y">
                         <EasingDoubleKeyFrame KeyTime="00:00:00"/>
-                        <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value="0">
+                        <EasingDoubleKeyFrame KeyTime="00:00:00.2" Value="0">
                             <EasingDoubleKeyFrame.EasingFunction>
                                 <CubicEase EasingMode="EaseOut"/>
                             </EasingDoubleKeyFrame.EasingFunction>
@@ -53,6 +53,6 @@
                 </TransformGroup>
             </ItemsControl.RenderTransform>
         </ItemsControl>
-        <TextBlock Text="{Binding Count.Value}" Margin="20" HorizontalAlignment="Right"/>
+        <TextBlock Text="{Binding Count.Value}" Margin="30" HorizontalAlignment="Right"/>
     </Grid>
 </Window>
