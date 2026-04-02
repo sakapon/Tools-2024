@@ -11,6 +11,26 @@
             <Grid/>
         </ItemsPanelTemplate>
         <DataTemplate x:Key="DiskTemplate">
+            <DataTemplate.Resources>
+                <Storyboard x:Key="MovedStoryboard">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MovedTransform" Storyboard.TargetProperty="X">
+                        <EasingDoubleKeyFrame KeyTime="00:00:00"/>
+                        <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value="0">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <CubicEase EasingMode="EaseOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MovedTransform" Storyboard.TargetProperty="Y">
+                        <EasingDoubleKeyFrame KeyTime="00:00:00"/>
+                        <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value="0">
+                            <EasingDoubleKeyFrame.EasingFunction>
+                                <CubicEase EasingMode="EaseOut"/>
+                            </EasingDoubleKeyFrame.EasingFunction>
+                        </EasingDoubleKeyFrame>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </DataTemplate.Resources>
             <Rectangle Width="{Binding Width}" Height="30" Fill="#FF33CCFF" RenderTransformOrigin="0.5,0.5" Loaded="DiskRectangle_Loaded">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
