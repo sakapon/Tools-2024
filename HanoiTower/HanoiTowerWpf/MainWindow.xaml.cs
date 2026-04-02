@@ -20,5 +20,10 @@ namespace HanoiTowerWpf
 		{
 			InitializeComponent();
 		}
+
+		void DiskRectangle_Loaded(object sender, RoutedEventArgs e)
+		{
+
+		}
 	}
 }
