@@ -1,0 +1,36 @@
+﻿<Window x:Class="HanoiTowerWpf101.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HanoiTowerWpf101"
+        mc:Ignorable="d"
+        Title="Hanoi Tower" Height="600" Width="900" FontSize="24">
+    <Window.Resources>
+        <ItemsPanelTemplate x:Key="DisksTemplate">
+            <Grid/>
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="DiskTemplate">
+            <Rectangle Width="{Binding Width}" Height="20" Fill="#FFFF9933" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding Left.Value}" Y="{Binding Top.Value}"/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+        </DataTemplate>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:AppModel/>
+    </Window.DataContext>
+    <Grid>
+        <ItemsControl ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Disks}" RenderTransformOrigin="0.5,0.5" Margin="20" HorizontalAlignment="Left">
+            <ItemsControl.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                </TransformGroup>
+            </ItemsControl.RenderTransform>
+        </ItemsControl>
+        <TextBlock Text="{Binding Count.Value}" Margin="20"/>
+    </Grid>
+</Window>
