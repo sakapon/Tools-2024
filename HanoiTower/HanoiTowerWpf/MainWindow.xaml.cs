@@ -37,6 +37,8 @@ namespace HanoiTowerWpf
 				var framesY = (DoubleAnimationUsingKeyFrames)sb.Children[1];
 				framesX.KeyFrames[0].Value = p.X;
 				framesY.KeyFrames[0].Value = p.Y;
+				framesX.KeyFrames[1].KeyTime = TimeSpan.FromSeconds(p.Y >= 0 ? 0.4 : 0.2);
+				framesY.KeyFrames[1].KeyTime = TimeSpan.FromSeconds(p.Y >= 0 ? 0.2 : 0.4);
 				sb.Begin(rect);
 			});
 		}

@@ -23,7 +23,7 @@
                     </DoubleAnimationUsingKeyFrames>
                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MovedTransform" Storyboard.TargetProperty="Y">
                         <EasingDoubleKeyFrame KeyTime="00:00:00"/>
-                        <EasingDoubleKeyFrame KeyTime="00:00:00.2" Value="0">
+                        <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="0">
                             <EasingDoubleKeyFrame.EasingFunction>
                                 <CubicEase EasingMode="EaseOut"/>
                             </EasingDoubleKeyFrame.EasingFunction>
