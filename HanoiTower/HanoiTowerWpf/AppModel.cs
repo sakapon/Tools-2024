@@ -6,19 +6,17 @@ namespace HanoiTowerWpf
 	{
 		const int NumberOfDisks = 5;
 
-		readonly Stack<Disk>[] Towers =
-		[
-			new Stack<Disk>(Enumerable.Range(1, NumberOfDisks).Reverse().Select((id, index) => new Disk(id, 0, index))),
-			new Stack<Disk>(),
-			new Stack<Disk>(),
-		];
-
+		public Tower[] Towers { get; } = [.. Enumerable.Range(0, 3).Select(id => new Tower(id))];
 		public Disk[] Disks { get; }
 		public ReactiveProperty<int> Count { get; } = new ReactiveProperty<int>(0);
 
 		public AppModel()
 		{
-			Disks = [.. Towers[0]];
+			var disks_r = Enumerable.Range(1, NumberOfDisks).Reverse().Select((id, index) => new Disk(id, Towers[0], index));
+			foreach (var disk in disks_r)
+				Towers[0].Disks.Push(disk);
+			Disks = [.. Towers[0].Disks];
+
 			Task.Run(() => MoveTower(NumberOfDisks, 0, 2, 1));
 		}
 
@@ -32,11 +30,11 @@ namespace HanoiTowerWpf
 
 		void MoveDisk(int from, int to)
 		{
-			Thread.Sleep(300);
-			var disk = Towers[from].Pop();
-			disk.TowerId.Value = to;
-			disk.Index.Value = Towers[to].Count;
-			Towers[to].Push(disk);
+			Thread.Sleep(500);
+			var disk = Towers[from].Disks.Pop();
+			disk.Tower.Value = Towers[to];
+			disk.IndexInTower.Value = Towers[to].Disks.Count;
+			Towers[to].Disks.Push(disk);
 			Count.Value++;
 		}
 	}

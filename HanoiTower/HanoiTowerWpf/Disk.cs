@@ -6,21 +6,28 @@ namespace HanoiTowerWpf
 	public class Disk
 	{
 		public int Id { get; }
-		public ReactiveProperty<int> TowerId { get; }
-		public ReactiveProperty<int> Index { get; }
+		public ReactiveProperty<Tower> Tower { get; }
+		public ReactiveProperty<int> IndexInTower { get; }
 
-		public int Width => Id * 20;
-		public ReadOnlyReactiveProperty<int> Left { get; }
-		public ReadOnlyReactiveProperty<int> Top { get; }
+		public int Width => Id * 30 + 10;
+		public ReadOnlyReactiveProperty<int> DeltaY { get; }
 
-		public Disk(int id, int towerId, int index)
+		public Disk(int id, Tower tower, int index)
 		{
 			Id = id;
-			TowerId = new ReactiveProperty<int>(towerId);
-			Index = new ReactiveProperty<int>(index);
+			Tower = new ReactiveProperty<Tower>(tower);
+			IndexInTower = new ReactiveProperty<int>(index);
 
-			Left = TowerId.Select(x => x * 200).ToReadOnlyReactiveProperty();
-			Top = Index.Select(x => x * 25).ToReadOnlyReactiveProperty();
+			DeltaY = IndexInTower.Select(x => x * -32).ToReadOnlyReactiveProperty();
 		}
+	}
+
+	public class Tower(int id)
+	{
+		public int Id { get; } = id;
+		public Stack<Disk> Disks { get; } = new Stack<Disk>();
+
+		public ReactiveProperty<double> DeltaX { get; } = new ReactiveProperty<double>(id * 300);
+		public ReactiveProperty<double> DeltaY { get; } = new ReactiveProperty<double>(0);
 	}
 }
