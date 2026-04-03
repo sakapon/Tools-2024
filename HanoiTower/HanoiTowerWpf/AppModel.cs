@@ -4,7 +4,7 @@ namespace HanoiTowerWpf
 {
 	public class AppModel
 	{
-		const int NumberOfDisks = 5;
+		const int NumberOfDisks = 6;
 
 		public Tower[] Towers { get; } = [.. Enumerable.Range(0, 3).Select(id => new Tower(id))];
 		public Disk[] Disks { get; }

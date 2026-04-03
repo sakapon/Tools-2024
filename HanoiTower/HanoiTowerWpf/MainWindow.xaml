@@ -7,7 +7,7 @@
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         x:Class="HanoiTowerWpf.MainWindow"
         mc:Ignorable="d"
-        Title="Hanoi Tower" Height="420" Width="900" FontSize="30">
+        Title="Hanoi Tower" Height="600" Width="900" FontSize="36">
     <Window.Resources>
         <ItemsPanelTemplate x:Key="DisksTemplate">
             <Grid/>
@@ -48,7 +48,7 @@
         <local:AppModel/>
     </Window.DataContext>
     <Grid>
-        <Grid Margin="30" RenderTransformOrigin="0.5,0.5">
+        <Grid Margin="30">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <TranslateTransform X="-300" Y="100"/>
@@ -56,6 +56,6 @@
             </Grid.RenderTransform>
             <ItemsControl ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Disks}"/>
         </Grid>
-        <TextBlock Text="{Binding Count.Value}" Margin="30" HorizontalAlignment="Right"/>
+        <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
     </Grid>
 </Window>
