@@ -33,12 +33,24 @@
                     </DoubleAnimationUsingKeyFrames>
                 </Storyboard>
             </DataTemplate.Resources>
-            <Rectangle Width="{Binding Width}" Height="30" Fill="#FF33CCFF" RenderTransformOrigin="0.5,0.5" Loaded="DiskRectangle_Loaded">
+            <Rectangle Width="{Binding Width}" Height="30" Fill="#FF33CCFF" Loaded="DiskRectangle_Loaded">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <TranslateTransform Y="{Binding DeltaY.Value}"/>
                         <TranslateTransform X="{Binding Tower.Value.DeltaX.Value}" Y="{Binding Tower.Value.DeltaY.Value}"/>
                         <TranslateTransform x:Name="MovedTransform"/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+        </DataTemplate>
+        <DataTemplate x:Key="TowerTemplate">
+            <Rectangle Width="250" Height="30" Fill="#FFFF9933">
+                <b:Interaction.Behaviors>
+                    <local:MouseDragBehavior/>
+                </b:Interaction.Behaviors>
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="DragTransform"/>
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
@@ -55,6 +67,7 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <ItemsControl ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Disks}"/>
+            <ItemsControl ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Towers}"/>
         </Grid>
         <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
     </Grid>
