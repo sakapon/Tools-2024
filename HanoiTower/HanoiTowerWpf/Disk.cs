@@ -1,5 +1,6 @@
 ﻿using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Windows;
 using Reactive.Bindings;
 
 namespace HanoiTowerWpf
@@ -11,9 +12,9 @@ namespace HanoiTowerWpf
 		public ReactiveProperty<int> IndexInTower { get; }
 
 		public int Width => Id * 30 + 10;
-		public ReadOnlyReactiveProperty<int> DeltaY { get; }
+		public ReadOnlyReactiveProperty<Vector> Delta { get; }
 
-		public Subject<(double X, double Y)> MovedEvent { get; } = new Subject<(double, double)>();
+		public Subject<Vector> MovedEvent { get; } = new Subject<Vector>();
 
 		public Disk(int id, Tower tower, int index)
 		{
@@ -21,7 +22,7 @@ namespace HanoiTowerWpf
 			Tower = new ReactiveProperty<Tower>(tower);
 			IndexInTower = new ReactiveProperty<int>(index);
 
-			DeltaY = IndexInTower.Select(x => x * -32).ToReadOnlyReactiveProperty();
+			Delta = IndexInTower.Select(x => new Vector(0, (x + 1) * -32)).ToReadOnlyReactiveProperty();
 		}
 	}
 
@@ -30,7 +31,6 @@ namespace HanoiTowerWpf
 		public int Id { get; } = id;
 		public Stack<Disk> Disks { get; } = new Stack<Disk>();
 
-		public ReactiveProperty<double> DeltaX { get; } = new ReactiveProperty<double>(id * 300);
-		public ReactiveProperty<double> DeltaY { get; } = new ReactiveProperty<double>(0);
+		public ReactiveProperty<Vector> Delta { get; } = new ReactiveProperty<Vector>(new Vector(id * 300, 0));
 	}
 }
