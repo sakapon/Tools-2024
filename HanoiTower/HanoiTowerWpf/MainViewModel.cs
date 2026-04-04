@@ -2,7 +2,7 @@
 
 namespace HanoiTowerWpf
 {
-	public class AppModel
+	public class MainViewModel
 	{
 		const int NumberOfDisks = 6;
 
@@ -10,7 +10,7 @@ namespace HanoiTowerWpf
 		public Disk[] Disks { get; }
 		public ReactiveProperty<int> Count { get; } = new ReactiveProperty<int>(0);
 
-		public AppModel()
+		public MainViewModel()
 		{
 			var disks_r = Enumerable.Range(1, NumberOfDisks).Reverse().Select((id, index) => new Disk(id, Towers[0], index));
 			foreach (var disk in disks_r)

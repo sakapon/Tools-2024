@@ -57,7 +57,7 @@
         </DataTemplate>
     </Window.Resources>
     <Window.DataContext>
-        <local:AppModel/>
+        <local:MainViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid Margin="30">
