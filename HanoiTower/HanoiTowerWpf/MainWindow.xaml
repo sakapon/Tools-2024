@@ -44,9 +44,9 @@
             </Rectangle>
         </DataTemplate>
         <DataTemplate x:Key="TowerTemplate">
-            <Rectangle Width="250" Height="30" Fill="#FFFF9933">
+            <Rectangle Width="250" Height="30" Fill="#FFFF9933" Cursor="Hand">
                 <b:Interaction.Behaviors>
-                    <local:MouseDragBehavior/>
+                    <local:MouseDragBehavior Delta="{Binding Delta.Value}"/>
                 </b:Interaction.Behaviors>
                 <Rectangle.RenderTransform>
                     <TransformGroup>
