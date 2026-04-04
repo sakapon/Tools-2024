@@ -36,8 +36,8 @@
             <Rectangle Width="{Binding Width}" Height="30" Fill="#FF33CCFF" Loaded="DiskRectangle_Loaded">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
-                        <TranslateTransform Y="{Binding DeltaY.Value}"/>
-                        <TranslateTransform X="{Binding Tower.Value.DeltaX.Value}" Y="{Binding Tower.Value.DeltaY.Value}"/>
+                        <TranslateTransform Y="{Binding Delta.Value.Y}"/>
+                        <TranslateTransform X="{Binding Tower.Value.Delta.Value.X}" Y="{Binding Tower.Value.Delta.Value.Y}"/>
                         <TranslateTransform x:Name="MovedTransform"/>
                     </TransformGroup>
                 </Rectangle.RenderTransform>
