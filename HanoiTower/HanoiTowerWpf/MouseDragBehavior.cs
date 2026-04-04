@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Data;
 using System.Windows.Media;
 using Microsoft.Xaml.Behaviors;
 
@@ -7,19 +8,12 @@ namespace HanoiTowerWpf
 	public class MouseDragBehavior : Behavior<FrameworkElement>
 	{
 		public static readonly DependencyProperty DeltaProperty =
-			DependencyProperty.Register("Delta", typeof(Vector), typeof(MouseDragBehavior), new FrameworkPropertyMetadata(default(Vector), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnDeltaChanged));
+			DependencyProperty.Register("Delta", typeof(Vector), typeof(MouseDragBehavior), new FrameworkPropertyMetadata(default(Vector), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 		public Vector Delta
 		{
 			get { return (Vector)GetValue(DeltaProperty); }
 			set { SetValue(DeltaProperty, value); }
-		}
-
-		static void OnDeltaChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-		{
-			var behavior = (MouseDragBehavior)d;
-			var ue = behavior.AssociatedObject;
-			var delta = (Vector)e.NewValue;
 		}
 
 		protected override void OnAttached()
@@ -31,8 +25,11 @@ namespace HanoiTowerWpf
 			fe.Loaded += (_, _) =>
 			{
 				var tt = (TranslateTransform)fe.FindName("DragTransform");
-				tt.X = Delta.X;
-				tt.Y = Delta.Y;
+
+				var bindingX = new Binding("Delta.X") { Source = this };
+				BindingOperations.SetBinding(tt, TranslateTransform.XProperty, bindingX);
+				var bindingY = new Binding("Delta.Y") { Source = this };
+				BindingOperations.SetBinding(tt, TranslateTransform.YProperty, bindingY);
 
 				var on = false;
 				Vector sd;
@@ -46,17 +43,14 @@ namespace HanoiTowerWpf
 				fe.MouseMove += (_, e) =>
 				{
 					if (!on) return;
-					var d = sd + (Vector)e.GetPosition(null);
-					tt.X = d.X;
-					tt.Y = d.Y;
-					Delta = d;
+					Delta = sd + (Vector)e.GetPosition(null);
 				};
-				fe.MouseLeftButtonUp += (_, e) =>
+				fe.MouseLeftButtonUp += (_, _) =>
 				{
 					if (!on) return;
 					on = false;
 				};
-				fe.MouseLeave += (_, e) =>
+				fe.MouseLeave += (_, _) =>
 				{
 					if (!on) return;
 					on = false;
