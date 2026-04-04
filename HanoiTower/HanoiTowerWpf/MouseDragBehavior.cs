@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using Microsoft.Xaml.Behaviors;
@@ -34,11 +35,13 @@ namespace HanoiTowerWpf
 				var on = false;
 				Vector sd;
 
+				// e.GetPosition(null) は、Window 要素を基準としたマウスの相対位置を取得します。
 				fe.MouseLeftButtonDown += (_, e) =>
 				{
 					if (on) return;
 					sd = Delta - (Vector)e.GetPosition(null);
 					on = true;
+					Debug.WriteLine($"Position: {e.GetPosition(null)}");
 				};
 				fe.MouseMove += (_, e) =>
 				{
@@ -49,11 +52,13 @@ namespace HanoiTowerWpf
 				{
 					if (!on) return;
 					on = false;
+					Debug.WriteLine($"MouseLeftButtonUp");
 				};
 				fe.MouseLeave += (_, _) =>
 				{
 					if (!on) return;
 					on = false;
+					Debug.WriteLine($"MouseLeave");
 				};
 			};
 		}
