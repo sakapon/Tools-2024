@@ -9,7 +9,7 @@ namespace HanoiTowerWpf
 	public class MouseDragBehavior : Behavior<FrameworkElement>
 	{
 		public static readonly DependencyProperty DeltaProperty =
-			DependencyProperty.Register("Delta", typeof(Vector), typeof(MouseDragBehavior), new FrameworkPropertyMetadata(default(Vector), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+			DependencyProperty.Register(nameof(Delta), typeof(Vector), typeof(MouseDragBehavior), new FrameworkPropertyMetadata(default(Vector), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 		public Vector Delta
 		{
@@ -25,12 +25,19 @@ namespace HanoiTowerWpf
 			var fe = AssociatedObject;
 			fe.Loaded += (_, _) =>
 			{
-				var tt = (TranslateTransform)fe.FindName("DragTransform");
-
+				var tt = new TranslateTransform();
 				var bindingX = new Binding("Delta.X") { Source = this };
 				BindingOperations.SetBinding(tt, TranslateTransform.XProperty, bindingX);
 				var bindingY = new Binding("Delta.Y") { Source = this };
 				BindingOperations.SetBinding(tt, TranslateTransform.YProperty, bindingY);
+
+				var transform = fe.RenderTransform;
+				if (transform is not TransformGroup tg)
+				{
+					fe.RenderTransform = tg = new TransformGroup();
+					if (transform != null) tg.Children.Add(transform);
+				}
+				tg.Children.Add(tt);
 
 				var on = false;
 				Vector sd;

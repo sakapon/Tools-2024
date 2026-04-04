@@ -48,11 +48,6 @@
                 <b:Interaction.Behaviors>
                     <local:MouseDragBehavior Delta="{Binding Delta.Value}"/>
                 </b:Interaction.Behaviors>
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <TranslateTransform x:Name="DragTransform"/>
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
             </Rectangle>
         </DataTemplate>
     </Window.Resources>
