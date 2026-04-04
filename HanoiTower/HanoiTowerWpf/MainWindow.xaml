@@ -60,6 +60,7 @@
         <local:MainViewModel/>
     </Window.DataContext>
     <Grid>
+        <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
         <Grid Margin="30">
             <Grid.RenderTransform>
                 <TransformGroup>
@@ -69,6 +70,5 @@
             <ItemsControl ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Disks}"/>
             <ItemsControl ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Towers}"/>
         </Grid>
-        <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
     </Grid>
 </Window>

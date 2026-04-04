@@ -17,7 +17,11 @@ namespace HanoiTowerWpf
 				Towers[0].Disks.Push(disk);
 			Disks = [.. Towers[0].Disks];
 
-			Task.Run(() => MoveTower(NumberOfDisks, 0, 2, 1));
+			Task.Run(() =>
+			{
+				Thread.Sleep(1000);
+				MoveTower(NumberOfDisks, 0, 2, 1);
+			});
 		}
 
 		void MoveTower(int n, int from, int to, int via)

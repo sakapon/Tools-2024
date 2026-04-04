@@ -31,20 +31,35 @@ namespace HanoiTowerWpf
 			fe.Loaded += (_, _) =>
 			{
 				var tt = (TranslateTransform)fe.FindName("DragTransform");
+				tt.X = Delta.X;
+				tt.Y = Delta.Y;
+
+				var on = false;
+				Vector sd;
 
 				fe.MouseLeftButtonDown += (_, e) =>
 				{
-					var p = e.GetPosition(null);
+					if (on) return;
+					sd = Delta - (Vector)e.GetPosition(null);
+					on = true;
 				};
 				fe.MouseMove += (_, e) =>
 				{
-					var p = e.GetPosition(null);
+					if (!on) return;
+					var d = sd + (Vector)e.GetPosition(null);
+					tt.X = d.X;
+					tt.Y = d.Y;
+					Delta = d;
 				};
 				fe.MouseLeftButtonUp += (_, e) =>
 				{
+					if (!on) return;
+					on = false;
 				};
 				fe.MouseLeave += (_, e) =>
 				{
+					if (!on) return;
+					on = false;
 				};
 			};
 		}
