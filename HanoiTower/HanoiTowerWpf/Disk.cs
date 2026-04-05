@@ -31,6 +31,6 @@ namespace HanoiTowerWpf
 		public int Id { get; } = id;
 		public Stack<Disk> Disks { get; } = new Stack<Disk>();
 
-		public ReactiveProperty<Vector> Delta { get; } = new ReactiveProperty<Vector>(new Vector(id * 300, 0));
+		public ReactiveProperty<Vector> Delta { get; } = new ReactiveProperty<Vector>(new Vector(id * 290, 0));
 	}
 }

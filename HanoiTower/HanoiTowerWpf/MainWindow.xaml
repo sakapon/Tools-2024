@@ -44,7 +44,7 @@
             </Rectangle>
         </DataTemplate>
         <DataTemplate x:Key="TowerTemplate">
-            <Rectangle Width="250" Height="30" Fill="#FFFF9933" RadiusX="6" RadiusY="6" Cursor="Hand">
+            <Rectangle Width="250" Height="50" Fill="#FFFF9933" RadiusX="6" RadiusY="6" Cursor="Hand">
                 <b:Interaction.Behaviors>
                     <local:MouseDragBehavior Delta="{Binding Delta.Value}"/>
                 </b:Interaction.Behaviors>
@@ -56,14 +56,14 @@
     </Window.DataContext>
     <Grid>
         <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
-        <Grid Margin="30">
+        <Grid HorizontalAlignment="Left">
             <Grid.RenderTransform>
                 <TransformGroup>
-                    <TranslateTransform X="-300" Y="100"/>
+                    <TranslateTransform X="25" Y="360"/>
                 </TransformGroup>
             </Grid.RenderTransform>
-            <ItemsControl ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Disks}"/>
-            <ItemsControl ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Towers}"/>
+            <ItemsControl ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Disks}" VerticalAlignment="Top"/>
+            <ItemsControl ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Towers}" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Window>
