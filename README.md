@@ -13,4 +13,9 @@ Visualizes BFS (Queue), DFS (Stack), and DFS (Recursion).
 ![](Images/BfsDfs/BfsDfsViewer-1.0.3-Rotation.gif)
 
 ## Overlay Canvas
-The overlay canvas with a red pen on the full screen.
+An overlay canvas with a red pen on the full screen.
+
+## Hanoi Tower
+A draggable Tower of Hanoi.
+
+![](Images/HanoiTower/HanoiTowerWpf-1.0.1-02.gif)
