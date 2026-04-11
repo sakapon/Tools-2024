@@ -9,6 +9,7 @@
         mc:Ignorable="d"
         Title="Tower of Hanoi" Height="600" Width="900" FontSize="36">
     <Window.Resources>
+        <CubicEase x:Key="CubicEaseOut" EasingMode="EaseOut"/>
         <ItemsPanelTemplate x:Key="DisksTemplate">
             <Grid/>
         </ItemsPanelTemplate>
@@ -17,19 +18,11 @@
                 <Storyboard x:Key="MovedStoryboard">
                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MovedTransform" Storyboard.TargetProperty="X">
                         <EasingDoubleKeyFrame KeyTime="00:00:00"/>
-                        <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="0">
-                            <EasingDoubleKeyFrame.EasingFunction>
-                                <CubicEase EasingMode="EaseOut"/>
-                            </EasingDoubleKeyFrame.EasingFunction>
-                        </EasingDoubleKeyFrame>
+                        <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="0" EasingFunction="{StaticResource CubicEaseOut}"/>
                     </DoubleAnimationUsingKeyFrames>
                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MovedTransform" Storyboard.TargetProperty="Y">
                         <EasingDoubleKeyFrame KeyTime="00:00:00"/>
-                        <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="0">
-                            <EasingDoubleKeyFrame.EasingFunction>
-                                <CubicEase EasingMode="EaseOut"/>
-                            </EasingDoubleKeyFrame.EasingFunction>
-                        </EasingDoubleKeyFrame>
+                        <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="0" EasingFunction="{StaticResource CubicEaseOut}"/>
                     </DoubleAnimationUsingKeyFrames>
                 </Storyboard>
             </DataTemplate.Resources>
