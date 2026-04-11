@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36908.2
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HanoiTowerConsole", "HanoiTowerConsole\HanoiTowerConsole.csproj", "{F63E6580-575B-4AD4-9D47-0C0EEEA0B2D3}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HanoiTowerWpf102", "HanoiTowerWpf102\HanoiTowerWpf102.csproj", "{66CF5FBF-1BDB-42CB-A9EB-DD2A354A03C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HanoiTowerWpf", "HanoiTowerWpf\HanoiTowerWpf.csproj", "{3D304361-745C-6C97-F09A-47F5FB004BA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HanoiTowerWpf201", "HanoiTowerWpf201\HanoiTowerWpf201.csproj", "{0C298FF4-CBA6-B4D5-C80F-EA355531FFE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3D304361-745C-6C97-F09A-47F5FB004BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D304361-745C-6C97-F09A-47F5FB004BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D304361-745C-6C97-F09A-47F5FB004BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C298FF4-CBA6-B4D5-C80F-EA355531FFE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C298FF4-CBA6-B4D5-C80F-EA355531FFE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C298FF4-CBA6-B4D5-C80F-EA355531FFE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C298FF4-CBA6-B4D5-C80F-EA355531FFE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
