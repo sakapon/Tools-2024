@@ -57,26 +57,35 @@ namespace HanoiTowerWpf201
 			((EasingDoubleBehavior)d).OnValueChanged((double)e.OldValue, (double)e.NewValue);
 		}
 
+		DateTime startTime;
+
 		void OnValueChanged(double oldValue, double newValue)
 		{
-			if (double.IsNaN(oldValue))
+			if (double.IsNaN(oldValue) || TimeSpan <= TimeSpan.Zero)
 			{
 				EasedValue = newValue;
 				return;
 			}
 
-			var startTime = DateTime.Now;
+			var st = startTime = DateTime.Now;
 
 			var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1 / Fps) };
 			timer.Tick += (_, _) =>
 			{
-				var t = (DateTime.Now - startTime).TotalSeconds / TimeSpan.TotalSeconds;
+				if (st != startTime)
+				{
+					timer.Stop();
+					return;
+				}
+
+				var t = (DateTime.Now - st).TotalSeconds / TimeSpan.TotalSeconds;
 				if (t >= 1)
 				{
 					timer.Stop();
 					EasedValue = newValue;
 					return;
 				}
+
 				var v = Easing?.Ease(t) ?? t;
 				EasedValue = oldValue + (newValue - oldValue) * v;
 			};
