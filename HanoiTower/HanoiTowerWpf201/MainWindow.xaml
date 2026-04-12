@@ -1,25 +1,32 @@
-﻿<Window x:Class="HanoiTowerWpf201.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HanoiTowerWpf201"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        x:Class="HanoiTowerWpf201.MainWindow"
         mc:Ignorable="d"
         Title="Tower of Hanoi" Height="600" Width="900" FontSize="36">
     <Window.Resources>
-        <local:FuncConverter x:Key="Disk_IdToWidth" ToFunc="id => id * 30 + 10"/>
-        <local:FuncConverter x:Key="Disk_TowerIdToX" ToFunc="id => id * 290"/>
-        <local:FuncConverter x:Key="Disk_IndexToY" ToFunc="i => (i + 1) * -32"/>
+        <local:FuncConverter x:Key="Disk_Id_Width" ToFunc="id =&gt; id * 30 + 10"/>
+        <local:FuncConverter x:Key="Disk_TowerId_X" ToFunc="id =&gt; id * 290"/>
+        <local:FuncConverter x:Key="Disk_Index_Y" ToFunc="i =&gt; (i + 1) * -32"/>
+        <CubicEase x:Key="CubicEaseOut" EasingMode="EaseOut"/>
         <ItemsPanelTemplate x:Key="DisksTemplate">
             <Grid/>
         </ItemsPanelTemplate>
         <DataTemplate x:Key="DiskTemplate">
-            <Rectangle Width="{Binding Id, Converter={StaticResource Disk_IdToWidth}}" Height="30" Fill="#FF3399FF" RadiusX="6" RadiusY="6">
+            <Rectangle Width="{Binding Id, Converter={StaticResource Disk_Id_Width}}" Height="30" Fill="#FF3399FF" RadiusX="6" RadiusY="6">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
-                        <TranslateTransform X="{Binding TowerId.Value, Converter={StaticResource Disk_TowerIdToX}}" Y="{Binding IndexInTower.Value, Converter={StaticResource Disk_IndexToY}}"/>
+                        <TranslateTransform X="{Binding EasedValue, ElementName=EasingX}" Y="{Binding EasedValue, ElementName=EasingY}"/>
                     </TransformGroup>
                 </Rectangle.RenderTransform>
+                <b:Interaction.Behaviors>
+                    <local:EasingDoubleBehavior x:Name="EasingX" Value="{Binding TowerId.Value, Converter={StaticResource Disk_TowerId_X}}" Easing="{StaticResource CubicEaseOut}" TimeSpan="00:00:00.4"/>
+                    <local:EasingDoubleBehavior x:Name="EasingY" Value="{Binding IndexInTower.Value, Converter={StaticResource Disk_Index_Y}}" Easing="{StaticResource CubicEaseOut}" TimeSpan="00:00:00.4"/>
+                </b:Interaction.Behaviors>
             </Rectangle>
         </DataTemplate>
     </Window.Resources>
