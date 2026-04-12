@@ -10,10 +10,10 @@ namespace HanoiTowerWpf201
 	/* 
      * Usage Example
      * 
-     * (1) Add the ScriptFuncConverter object to <Window.Resources> in the XAML file.
-     * <local:ScriptFuncConverter x:Key="Scale3Converter" ToFuncType="Func&lt;int, int&gt;" ToFunc="x => 3 * x"/>
+     * (1) Add a FuncConverter object to <Window.Resources> in the XAML file.
+     * <local:FuncConverter x:Key="Scale3Converter" ToFuncType="Func&lt;int, int&gt;" ToFunc="x => 3 * x"/>
      * 
-     * (2) Set the ScriptFuncConverter object to the Binding.Converter property.
+     * (2) Set the FuncConverter object to the Binding.Converter property.
      * <TextBlock Text="{Binding Width, Converter={StaticResource Scale3Converter}}"/>
      */
 
@@ -21,20 +21,20 @@ namespace HanoiTowerWpf201
 	/// Represents the value converter that uses the defined functions.
 	/// </summary>
 	[ValueConversion(typeof(object), typeof(object))]
-	public class ScriptFuncConverter : DependencyObject, IValueConverter
+	public class FuncConverter : DependencyObject, IValueConverter
 	{
 		// XAML 上で値が設定される順序は不定のため、すべて DependencyProperty とします。
 		public static readonly DependencyProperty ToFuncProperty =
-			DependencyProperty.Register(nameof(ToFunc), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("", (d, _) => ((ScriptFuncConverter)d).UpdateToFunc()));
+			DependencyProperty.Register(nameof(ToFunc), typeof(string), typeof(FuncConverter), new PropertyMetadata("", (d, _) => ((FuncConverter)d).UpdateToFunc()));
 
 		public static readonly DependencyProperty FromFuncProperty =
-			DependencyProperty.Register(nameof(FromFunc), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("", (d, _) => ((ScriptFuncConverter)d).UpdateFromFunc()));
+			DependencyProperty.Register(nameof(FromFunc), typeof(string), typeof(FuncConverter), new PropertyMetadata("", (d, _) => ((FuncConverter)d).UpdateFromFunc()));
 
 		public static readonly DependencyProperty ToFuncTypeProperty =
-			DependencyProperty.Register(nameof(ToFuncType), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("Func<int, int>", (d, _) => ((ScriptFuncConverter)d).UpdateToFunc()));
+			DependencyProperty.Register(nameof(ToFuncType), typeof(string), typeof(FuncConverter), new PropertyMetadata("Func<int, int>", (d, _) => ((FuncConverter)d).UpdateToFunc()));
 
 		public static readonly DependencyProperty FromFuncTypeProperty =
-			DependencyProperty.Register(nameof(FromFuncType), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("Func<int, int>", (d, _) => ((ScriptFuncConverter)d).UpdateFromFunc()));
+			DependencyProperty.Register(nameof(FromFuncType), typeof(string), typeof(FuncConverter), new PropertyMetadata("Func<int, int>", (d, _) => ((FuncConverter)d).UpdateFromFunc()));
 
 		/// <summary>
 		/// Gets or sets the function to use in the <see cref="Convert"/> method.

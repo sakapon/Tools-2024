@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="Tower of Hanoi" Height="600" Width="900" FontSize="36">
     <Window.Resources>
-        <local:ScriptFuncConverter x:Key="Disk_IdToWidth" ToFunc="id => id * 30 + 10"/>
-        <local:ScriptFuncConverter x:Key="Disk_TowerIdToX" ToFunc="id => id * 290"/>
-        <local:ScriptFuncConverter x:Key="Disk_IndexToY" ToFunc="i => (i + 1) * -32"/>
+        <local:FuncConverter x:Key="Disk_IdToWidth" ToFunc="id => id * 30 + 10"/>
+        <local:FuncConverter x:Key="Disk_TowerIdToX" ToFunc="id => id * 290"/>
+        <local:FuncConverter x:Key="Disk_IndexToY" ToFunc="i => (i + 1) * -32"/>
         <ItemsPanelTemplate x:Key="DisksTemplate">
             <Grid/>
         </ItemsPanelTemplate>
