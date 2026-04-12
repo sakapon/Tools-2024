@@ -5,6 +5,14 @@ using Microsoft.Xaml.Behaviors;
 
 namespace HanoiTowerWpf201
 {
+	// Usage Example
+	// 
+	//<TextBlock Text="{Binding EasedValue, ElementName=EasingApprox, StringFormat=\{0:F3\}}">
+	//    <b:Interaction.Behaviors>
+	//        <local:EasingDoubleBehavior x:Name="EasingApprox" Value="{Binding Approx.Value}" TimeSpan="00:00:00.6" Easing="{StaticResource CubicEaseOut}"/>
+	//    </b:Interaction.Behaviors>
+	//</TextBlock>
+
 	public class EasingDoubleBehavior : Behavior<DependencyObject>
 	{
 		public static readonly DependencyProperty ValueProperty =
