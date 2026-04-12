@@ -17,7 +17,7 @@ namespace HanoiTowerWpf201
 			DependencyProperty.Register(nameof(TimeSpan), typeof(TimeSpan), typeof(EasingDoubleBehavior), new PropertyMetadata(TimeSpan.Zero));
 
 		public static readonly DependencyProperty FpsProperty =
-			DependencyProperty.Register(nameof(Fps), typeof(double), typeof(EasingDoubleBehavior), new PropertyMetadata(60.0));
+			DependencyProperty.Register(nameof(Fps), typeof(double), typeof(EasingDoubleBehavior), new PropertyMetadata(60.0, null, (_, o) => (double)o > 0 ? o : 60.0));
 
 		public static readonly DependencyProperty EasingProperty =
 			DependencyProperty.Register(nameof(Easing), typeof(IEasingFunction), typeof(EasingDoubleBehavior), new PropertyMetadata(null));
