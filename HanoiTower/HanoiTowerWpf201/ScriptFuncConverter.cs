@@ -71,43 +71,29 @@ namespace HanoiTowerWpf201
 
 		void UpdateToFunc()
 		{
-			if (string.IsNullOrWhiteSpace(ToFunc))
-			{
-				convertTo = null;
-				return;
-			}
+			convertTo = GetFunc(ToFuncType, ToFunc);
+		}
+
+		void UpdateFromFunc()
+		{
+			convertFrom = GetFunc(FromFuncType, FromFunc);
+		}
+
+		static MulticastDelegate GetFunc(string funcType, string func)
+		{
+			if (string.IsNullOrWhiteSpace(func)) return null;
 
 			try
 			{
 				// CSharpScript.EvaluateAsync<Func<int, int>>("x => 3 * x");
 				// "using System; Func<int, int> f = x => 3 * x; f"
-				var task = CSharpScript.EvaluateAsync($"using System; {ToFuncType} f = {ToFunc}; f");
+				var task = CSharpScript.EvaluateAsync($"using System; {funcType} f = {func}; f");
 				task.Wait();
-				convertTo = (MulticastDelegate)task.Result;
+				return (MulticastDelegate)task.Result;
 			}
 			catch (CompilationErrorException)
 			{
-				convertTo = null;
-			}
-		}
-
-		void UpdateFromFunc()
-		{
-			if (string.IsNullOrWhiteSpace(FromFunc))
-			{
-				convertFrom = null;
-				return;
-			}
-
-			try
-			{
-				var task = CSharpScript.EvaluateAsync($"using System; {FromFuncType} f = {FromFunc}; f");
-				task.Wait();
-				convertFrom = (MulticastDelegate)task.Result;
-			}
-			catch (CompilationErrorException)
-			{
-				convertFrom = null;
+				return null;
 			}
 		}
 
