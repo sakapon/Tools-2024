@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using Microsoft.Xaml.Behaviors;
 
 namespace HanoiTowerWpf201
@@ -49,7 +50,22 @@ namespace HanoiTowerWpf201
 				return;
 			}
 
-			EasedValue = newValue;
+			var startTime = DateTime.Now;
+
+			var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1 / Fps) };
+			timer.Tick += (_, _) =>
+			{
+				var t = (DateTime.Now - startTime).TotalSeconds / TimeSpan.TotalSeconds;
+				if (t >= 1)
+				{
+					timer.Stop();
+					EasedValue = newValue;
+					return;
+				}
+				var v = Easing?.Ease(t) ?? t;
+				EasedValue = oldValue + (newValue - oldValue) * v;
+			};
+			timer.Start();
 		}
 	}
 }
