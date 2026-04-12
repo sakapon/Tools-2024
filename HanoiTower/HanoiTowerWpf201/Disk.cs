@@ -1,26 +1,13 @@
-﻿using System.Reactive.Linq;
-using Reactive.Bindings;
+﻿using Reactive.Bindings;
 
 namespace HanoiTowerWpf201
 {
-	public class Disk
+	public class Disk(int id, int towerId, int index)
 	{
-		public int Id { get; }
-		public ReactiveProperty<int> TowerId { get; }
-		public ReactiveProperty<int> IndexInTower { get; }
+		public int Id { get; } = id;
+		public ReactiveProperty<int> TowerId { get; } = new ReactiveProperty<int>(towerId);
+		public ReactiveProperty<int> IndexInTower { get; } = new ReactiveProperty<int>(index);
 
 		public int Width => Id * 30 + 10;
-		public ReadOnlyReactiveProperty<int> Left { get; }
-		public ReadOnlyReactiveProperty<int> Top { get; }
-
-		public Disk(int id, int towerId, int index)
-		{
-			Id = id;
-			TowerId = new ReactiveProperty<int>(towerId);
-			IndexInTower = new ReactiveProperty<int>(index);
-
-			Left = TowerId.Select(x => x * 290).ToReadOnlyReactiveProperty();
-			Top = IndexInTower.Select(x => (x + 1) * -32).ToReadOnlyReactiveProperty();
-		}
 	}
 }

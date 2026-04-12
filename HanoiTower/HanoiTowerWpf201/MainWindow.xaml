@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="Tower of Hanoi" Height="600" Width="900" FontSize="36">
     <Window.Resources>
+        <local:ScriptFuncConverter x:Key="DiskLeftConverter" ToFunc="x => x * 290"/>
+        <local:ScriptFuncConverter x:Key="DiskTopConverter" ToFunc="x => (x + 1) * -32"/>
         <ItemsPanelTemplate x:Key="DisksTemplate">
             <Grid/>
         </ItemsPanelTemplate>
@@ -14,7 +16,7 @@
             <Rectangle Width="{Binding Width}" Height="30" Fill="#FF3399FF" RadiusX="6" RadiusY="6">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
-                        <TranslateTransform X="{Binding Left.Value}" Y="{Binding Top.Value}"/>
+                        <TranslateTransform X="{Binding TowerId.Value, Converter={StaticResource DiskLeftConverter}}" Y="{Binding IndexInTower.Value, Converter={StaticResource DiskTopConverter}}"/>
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
