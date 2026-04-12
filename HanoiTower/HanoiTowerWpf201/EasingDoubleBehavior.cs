@@ -12,6 +12,9 @@ namespace HanoiTowerWpf201
 		public static readonly DependencyProperty EasedValueProperty =
 			DependencyProperty.Register(nameof(EasedValue), typeof(double), typeof(EasingDoubleBehavior), new PropertyMetadata(double.NaN));
 
+		public static readonly DependencyProperty TimeSpanProperty =
+			DependencyProperty.Register(nameof(TimeSpan), typeof(TimeSpan), typeof(EasingDoubleBehavior), new PropertyMetadata(TimeSpan.Zero));
+
 		public double Value
 		{
 			get { return (double)GetValue(ValueProperty); }
@@ -24,7 +27,14 @@ namespace HanoiTowerWpf201
 			set { SetValue(EasedValueProperty, value); }
 		}
 
+		public TimeSpan TimeSpan
+		{
+			get { return (TimeSpan)GetValue(TimeSpanProperty); }
+			set { SetValue(TimeSpanProperty, value); }
+		}
+
 		public IEasingFunction Easing { get; set; }
+		public double Fps { get; set; } = 60;
 
 		static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
@@ -33,6 +43,12 @@ namespace HanoiTowerWpf201
 
 		void OnValueChanged(double oldValue, double newValue)
 		{
+			if (double.IsNaN(oldValue))
+			{
+				EasedValue = newValue;
+				return;
+			}
+
 			EasedValue = newValue;
 		}
 	}
