@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
 
 namespace HanoiTowerWpf201
 {
@@ -10,7 +11,7 @@ namespace HanoiTowerWpf201
      * Usage Example
      * 
      * (1) Add the ScriptFuncConverter object to <Window.Resources> in the XAML file.
-     * <local:ScriptFuncConverter x:Key="Scale3Converter" ToFunc="x => 3 * x"/>
+     * <local:ScriptFuncConverter x:Key="Scale3Converter" ToFuncType="Func&lt;int, int&gt;" ToFunc="x => 3 * x"/>
      * 
      * (2) Set the ScriptFuncConverter object to the Binding.Converter property.
      * <TextBlock Text="{Binding Width, Converter={StaticResource Scale3Converter}}"/>
@@ -22,11 +23,18 @@ namespace HanoiTowerWpf201
 	[ValueConversion(typeof(object), typeof(object))]
 	public class ScriptFuncConverter : DependencyObject, IValueConverter
 	{
+		// XAML 上で値が設定される順序は不定のため、すべて DependencyProperty とします。
 		public static readonly DependencyProperty ToFuncProperty =
-			DependencyProperty.Register(nameof(ToFunc), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("", (d, e) => ((ScriptFuncConverter)d).UpdateToFunc()));
+			DependencyProperty.Register(nameof(ToFunc), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("", (d, _) => ((ScriptFuncConverter)d).UpdateToFunc()));
 
 		public static readonly DependencyProperty FromFuncProperty =
-			DependencyProperty.Register(nameof(FromFunc), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("", (d, e) => ((ScriptFuncConverter)d).UpdateFromFunc()));
+			DependencyProperty.Register(nameof(FromFunc), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("", (d, _) => ((ScriptFuncConverter)d).UpdateFromFunc()));
+
+		public static readonly DependencyProperty ToFuncTypeProperty =
+			DependencyProperty.Register(nameof(ToFuncType), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("Func<int, int>", (d, _) => ((ScriptFuncConverter)d).UpdateToFunc()));
+
+		public static readonly DependencyProperty FromFuncTypeProperty =
+			DependencyProperty.Register(nameof(FromFuncType), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("Func<int, int>", (d, _) => ((ScriptFuncConverter)d).UpdateFromFunc()));
 
 		/// <summary>
 		/// Gets or sets the function to use in the <see cref="Convert"/> method.
@@ -46,8 +54,17 @@ namespace HanoiTowerWpf201
 			set { SetValue(FromFuncProperty, value); }
 		}
 
-		public string ToFuncType { get; set; } = "Func<int, int>";
-		public string FromFuncType { get; set; } = "Func<int, int>";
+		public string ToFuncType
+		{
+			get { return (string)GetValue(ToFuncTypeProperty); }
+			set { SetValue(ToFuncTypeProperty, value); }
+		}
+
+		public string FromFuncType
+		{
+			get { return (string)GetValue(FromFuncTypeProperty); }
+			set { SetValue(FromFuncTypeProperty, value); }
+		}
 
 		MulticastDelegate convertTo;
 		MulticastDelegate convertFrom;
@@ -60,11 +77,18 @@ namespace HanoiTowerWpf201
 				return;
 			}
 
-			// CSharpScript.EvaluateAsync<Func<int, int>>("x => 3 * x");
-			// "using System; Func<int, int> f = x => 3 * x; f"
-			var task = CSharpScript.EvaluateAsync($"using System; {ToFuncType} f = {ToFunc}; f");
-			task.Wait();
-			convertTo = (MulticastDelegate)task.Result;
+			try
+			{
+				// CSharpScript.EvaluateAsync<Func<int, int>>("x => 3 * x");
+				// "using System; Func<int, int> f = x => 3 * x; f"
+				var task = CSharpScript.EvaluateAsync($"using System; {ToFuncType} f = {ToFunc}; f");
+				task.Wait();
+				convertTo = (MulticastDelegate)task.Result;
+			}
+			catch (CompilationErrorException)
+			{
+				convertTo = null;
+			}
 		}
 
 		void UpdateFromFunc()
@@ -75,9 +99,16 @@ namespace HanoiTowerWpf201
 				return;
 			}
 
-			var task = CSharpScript.EvaluateAsync($"using System; {FromFuncType} f = {FromFunc}; f");
-			task.Wait();
-			convertFrom = (MulticastDelegate)task.Result;
+			try
+			{
+				var task = CSharpScript.EvaluateAsync($"using System; {FromFuncType} f = {FromFunc}; f");
+				task.Wait();
+				convertFrom = (MulticastDelegate)task.Result;
+			}
+			catch (CompilationErrorException)
+			{
+				convertFrom = null;
+			}
 		}
 
 		/// <summary>
