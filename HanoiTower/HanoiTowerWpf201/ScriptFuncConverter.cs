@@ -23,10 +23,10 @@ namespace HanoiTowerWpf201
 	public class ScriptFuncConverter : DependencyObject, IValueConverter
 	{
 		public static readonly DependencyProperty ToFuncProperty =
-			DependencyProperty.Register(nameof(ToFunc), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata(""));
+			DependencyProperty.Register(nameof(ToFunc), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("", (d, e) => ((ScriptFuncConverter)d).UpdateToFunc()));
 
 		public static readonly DependencyProperty FromFuncProperty =
-			DependencyProperty.Register(nameof(FromFunc), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata(""));
+			DependencyProperty.Register(nameof(FromFunc), typeof(string), typeof(ScriptFuncConverter), new PropertyMetadata("", (d, e) => ((ScriptFuncConverter)d).UpdateFromFunc()));
 
 		/// <summary>
 		/// Gets or sets the function to use in the <see cref="Convert"/> method.
@@ -46,6 +46,40 @@ namespace HanoiTowerWpf201
 			set { SetValue(FromFuncProperty, value); }
 		}
 
+		public string ToFuncType { get; set; } = "Func<int, int>";
+		public string FromFuncType { get; set; } = "Func<int, int>";
+
+		MulticastDelegate convertTo;
+		MulticastDelegate convertFrom;
+
+		void UpdateToFunc()
+		{
+			if (string.IsNullOrWhiteSpace(ToFunc))
+			{
+				convertTo = null;
+				return;
+			}
+
+			// CSharpScript.EvaluateAsync<Func<int, int>>("x => 3 * x");
+			// "using System; Func<int, int> f = x => 3 * x; f"
+			var task = CSharpScript.EvaluateAsync($"using System; {ToFuncType} f = {ToFunc}; f");
+			task.Wait();
+			convertTo = (MulticastDelegate)task.Result;
+		}
+
+		void UpdateFromFunc()
+		{
+			if (string.IsNullOrWhiteSpace(FromFunc))
+			{
+				convertFrom = null;
+				return;
+			}
+
+			var task = CSharpScript.EvaluateAsync($"using System; {FromFuncType} f = {FromFunc}; f");
+			task.Wait();
+			convertFrom = (MulticastDelegate)task.Result;
+		}
+
 		/// <summary>
 		/// Converts a value using the function represented by the <see cref="ToFunc"/> property.
 		/// </summary>
@@ -56,7 +90,7 @@ namespace HanoiTowerWpf201
 		/// <returns>A converted value.</returns>
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			return DoFunc(ToFunc, value, parameter);
+			return DoFunc(convertTo, value, parameter);
 		}
 
 		/// <summary>
@@ -69,17 +103,23 @@ namespace HanoiTowerWpf201
 		/// <returns>A converted value.</returns>
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			return DoFunc(FromFunc, value, parameter);
+			return DoFunc(convertFrom, value, parameter);
 		}
 
-		static object DoFunc(string script, object value, object parameter)
+		static object DoFunc(MulticastDelegate func, object value, object parameter)
 		{
-			if (string.IsNullOrWhiteSpace(script)) return value;
+			if (func == null) return value;
 
-			var task = CSharpScript.EvaluateAsync<Func<int, object>>(script);
-			task.Wait();
-			var func = task.Result;
-			return func((int)value);
+			if (func.Method.ContainsGenericParameters) return Binding.DoNothing;
+
+			var parameterInfoes = func.Method.GetParameters();
+			return parameterInfoes.Length switch
+			{
+				0 => func.DynamicInvoke(),
+				1 => func.DynamicInvoke(value),
+				2 => func.DynamicInvoke(value, parameter),
+				_ => Binding.DoNothing,
+			};
 		}
 	}
 }
