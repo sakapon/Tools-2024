@@ -7,7 +7,7 @@
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         x:Class="HanoiTowerWpf201.MainWindow"
         mc:Ignorable="d"
-        Title="Tower of Hanoi" Height="600" Width="900" FontSize="36">
+        Title="Tower of Hanoi" Height="600" Width="900" FontSize="36" Background="{DynamicResource Default_BackColor}" Foreground="{DynamicResource Default_ForeColor}">
     <Window.Resources>
         <local:FuncConverter x:Key="Disk_Id_Width" ToFunc="id =&gt; id * 30 + 10"/>
         <local:FuncConverter x:Key="Disk_TowerId_X" ToFunc="id =&gt; id * 290"/>
@@ -17,7 +17,7 @@
             <Grid/>
         </ItemsPanelTemplate>
         <DataTemplate x:Key="DiskTemplate">
-            <Rectangle Width="{Binding Id, Converter={StaticResource Disk_Id_Width}}" Height="30" Fill="#FF3399FF" RadiusX="6" RadiusY="6">
+            <Rectangle Width="{Binding Id, Converter={StaticResource Disk_Id_Width}}" Height="30" Fill="{DynamicResource Phone_Blue}" RadiusX="6" RadiusY="6">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <TranslateTransform X="{Binding EasedValue, ElementName=EasingX}" Y="{Binding EasedValue, ElementName=EasingY}"/>
