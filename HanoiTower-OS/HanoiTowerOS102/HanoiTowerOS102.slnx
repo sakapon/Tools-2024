@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="HanoiTowerOS102/HanoiTowerOS102.Browser/HanoiTowerOS102.Browser.csproj" />
+  <Project Path="HanoiTowerOS102/HanoiTowerOS102.Simulator/HanoiTowerOS102.Simulator.csproj" />
+  <Project Path="HanoiTowerOS102/HanoiTowerOS102/HanoiTowerOS102.csproj" />
+</Solution>
