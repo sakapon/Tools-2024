@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,11 +8,13 @@ using Reactive.Bindings;
 
 namespace HanoiTowerOS102
 {
+	// OpenSilver では、非同期処理もすべて UI スレッドで動作します。
+	// したがって、ReactiveCollection は不要です。
 	public class AppModel
 	{
 		const int NumberOfDisks = 5;
 
-		public ReactiveCollection<Disk>[] Towers { get; } =
+		public ObservableCollection<Disk>[] Towers { get; } =
 		[
 			[.. Enumerable.Range(1, NumberOfDisks).Reverse().Select(id => new Disk(id))],
 			[],
@@ -38,8 +41,8 @@ namespace HanoiTowerOS102
 		{
 			await Task.Delay(300);
 			var disk = Towers[from].Last();
-			Towers[from].RemoveAtOnScheduler(Towers[from].Count - 1);
-			Towers[to].AddOnScheduler(disk);
+			Towers[from].RemoveAt(Towers[from].Count - 1);
+			Towers[to].Add(disk);
 			Count.Value++;
 		}
 	}
