@@ -5,9 +5,29 @@
       xmlns:local="clr-namespace:HanoiTowerOS102"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
-      Foreground="{DynamicResource Theme_TextBrush}">
-
+      Foreground="{DynamicResource Theme_TextBrush}" FontSize="36">
+    <Page.Resources>
+        <ItemsPanelTemplate x:Key="TowersTemplate">
+            <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="TowerTemplate">
+            <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DiskTemplate}" Width="280"/>
+        </DataTemplate>
+        <DataTemplate x:Key="DiskTemplate">
+            <Rectangle Width="{Binding Width}" Height="30" Fill="{DynamicResource Phone_Blue}" Margin="1" RadiusX="6" RadiusY="6"/>
+        </DataTemplate>
+    </Page.Resources>
+    <Page.DataContext>
+        <local:AppModel/>
+    </Page.DataContext>
     <Grid Background="{DynamicResource Theme_BackgroundBrush}">
-        <TextBlock Text="Hello, World!" FontSize="23" Margin="32,32,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
+        <ItemsControl ItemsSource="{Binding Towers}" ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource TowersTemplate}" Margin="30" RenderTransformOrigin="0.5,0.5">
+            <ItemsControl.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                </TransformGroup>
+            </ItemsControl.RenderTransform>
+        </ItemsControl>
     </Grid>
 </Page>
