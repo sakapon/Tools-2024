@@ -8,6 +8,7 @@ namespace HanoiTowerOS102
 	public class AppModel
 	{
 		const int NumberOfDisks = 5;
+		const int Interval_ms = 300;
 
 		public ObservableCollection<Disk>[] Towers { get; } =
 		[
@@ -34,7 +35,7 @@ namespace HanoiTowerOS102
 
 		async Task MoveDisk(int from, int to)
 		{
-			await Task.Delay(300);
+			await Task.Delay(Interval_ms);
 			var disk = Towers[from].Last();
 			Towers[from].RemoveAt(Towers[from].Count - 1);
 			Towers[to].Add(disk);

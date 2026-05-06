@@ -5,6 +5,7 @@ namespace HanoiTowerWpf102
 	public class AppModel
 	{
 		const int NumberOfDisks = 5;
+		const int Interval_ms = 300;
 
 		public ReactiveCollection<Disk>[] Towers { get; } =
 		[
@@ -31,7 +32,7 @@ namespace HanoiTowerWpf102
 
 		async Task MoveDisk(int from, int to)
 		{
-			await Task.Delay(300);
+			await Task.Delay(Interval_ms);
 			var disk = Towers[from].Last();
 			Towers[from].RemoveAtOnScheduler(Towers[from].Count - 1);
 			Towers[to].AddOnScheduler(disk);
