@@ -5,6 +5,8 @@
     xmlns:local="clr-namespace:HanoiTowerOS102">
     <Application.Resources>
         <ResourceDictionary>
+            <SolidColorBrush x:Key="Default_BackColor" Color="#FF181818"/>
+            <SolidColorBrush x:Key="Default_ForeColor" Color="#FFE0E0E0"/>
             <SolidColorBrush x:Key="Phone_Blue" Color="#FF1BA1E2"/>
             <SolidColorBrush x:Key="Phone_Orange" Color="#FFF09609"/>
         </ResourceDictionary>
