@@ -20,7 +20,7 @@
     <Page.DataContext>
         <local:AppModel/>
     </Page.DataContext>
-    <Grid Background="{DynamicResource Theme_BackgroundBrush}">
+    <Grid MaxHeight="600" Width="900" Background="{DynamicResource Theme_BackgroundBrush}">
         <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
         <ItemsControl ItemsSource="{Binding Towers}" ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource TowersTemplate}" Margin="30" RenderTransformOrigin="0.5,0.5">
             <ItemsControl.RenderTransform>
