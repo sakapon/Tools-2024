@@ -5,9 +5,38 @@
       xmlns:local="clr-namespace:HanoiTowerOS201"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
-      Foreground="{DynamicResource Theme_TextBrush}">
-
-    <Grid Background="{DynamicResource Theme_BackgroundBrush}">
-        <TextBlock Text="Hello, World!" FontSize="23" Margin="32,32,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-    </Grid>
+      Foreground="{DynamicResource Default_ForeColor}" FontSize="36">
+    <Page.Resources>
+        <local:FuncConverter x:Key="Disk_Id_Width" ToFunc="{x:Static local:ViewFuncs.Disk_Id_Width}"/>
+        <local:FuncConverter x:Key="Disk_TowerId_X" ToFunc="{x:Static local:ViewFuncs.Disk_TowerId_X}"/>
+        <local:FuncConverter x:Key="Disk_Index_Y" ToFunc="{x:Static local:ViewFuncs.Disk_Index_Y}"/>
+        <CubicEase x:Key="CubicEaseOut" EasingMode="EaseOut"/>
+        <ItemsPanelTemplate x:Key="DisksTemplate">
+            <Grid/>
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="DiskTemplate">
+            <Rectangle Width="{Binding Id, Converter={StaticResource Disk_Id_Width}}" Height="30" Fill="{DynamicResource Phone_Blue}" RadiusX="6" RadiusY="6">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding TowerId.Value, Converter={StaticResource Disk_TowerId_X}}" Y="{Binding IndexInTower.Value, Converter={StaticResource Disk_Index_Y}}"/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+        </DataTemplate>
+    </Page.Resources>
+    <Page.DataContext>
+        <local:AppModel/>
+    </Page.DataContext>
+    <Viewbox Margin="20">
+        <Grid Height="600" Width="900" Background="{DynamicResource Default_BackColor}">
+            <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
+            <ItemsControl ItemsSource="{Binding Disks}" ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <ItemsControl.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="50" Y="450"/>
+                    </TransformGroup>
+                </ItemsControl.RenderTransform>
+            </ItemsControl>
+        </Grid>
+    </Viewbox>
 </Page>
