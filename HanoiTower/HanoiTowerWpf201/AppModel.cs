@@ -5,12 +5,13 @@ namespace HanoiTowerWpf201
 	public class AppModel
 	{
 		const int NumberOfDisks = 6;
+		const int Interval_ms = 400;
 
 		readonly Stack<Disk>[] Towers =
 		[
 			new Stack<Disk>(Enumerable.Range(1, NumberOfDisks).Reverse().Select((id, index) => new Disk(id, 0, index))),
-			new Stack<Disk>(),
-			new Stack<Disk>(),
+			[],
+			[],
 		];
 
 		public Disk[] Disks { get; }
@@ -19,24 +20,21 @@ namespace HanoiTowerWpf201
 		public AppModel()
 		{
 			Disks = [.. Towers[0]];
-			Task.Run(() =>
-			{
-				Thread.Sleep(1000);
-				MoveTower(NumberOfDisks, 0, 2, 1);
-			});
+			Task.Delay(1000)
+				.ContinueWith(_ => MoveTower(NumberOfDisks, 0, 2, 1));
 		}
 
-		void MoveTower(int n, int from, int to, int via)
+		async Task MoveTower(int n, int from, int to, int via)
 		{
 			--n;
-			if (n > 0) MoveTower(n, from, via, to);
-			MoveDisk(from, to);
-			if (n > 0) MoveTower(n, via, to, from);
+			if (n > 0) await MoveTower(n, from, via, to);
+			await MoveDisk(from, to);
+			if (n > 0) await MoveTower(n, via, to, from);
 		}
 
-		void MoveDisk(int from, int to)
+		async Task MoveDisk(int from, int to)
 		{
-			Thread.Sleep(400);
+			await Task.Delay(Interval_ms);
 			var disk = Towers[from].Pop();
 			disk.TowerId.Value = to;
 			disk.IndexInTower.Value = Towers[to].Count;
