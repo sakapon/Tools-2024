@@ -6,6 +6,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:b="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d"
+      d:DesignHeight="360" d:DesignWidth="600"
       Foreground="{DynamicResource Default_ForeColor}" FontSize="36">
     <Page.Resources>
         <local:FuncConverter x:Key="Disk_Id_Width" ToFunc="{x:Static local:ViewFuncs.Disk_Id_Width}"/>
