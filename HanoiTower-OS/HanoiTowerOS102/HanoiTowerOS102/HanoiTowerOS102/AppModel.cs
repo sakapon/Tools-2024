@@ -4,7 +4,7 @@ using Reactive.Bindings;
 namespace HanoiTowerOS102
 {
 	// OpenSilver では、非同期処理もすべて UI スレッドで動作します。
-	// したがって、ReactiveCollection は不要です。
+	// したがって、ReactiveCollection は不要です (ReactiveCollection のままでも可)。
 	public class AppModel
 	{
 		const int NumberOfDisks = 5;
