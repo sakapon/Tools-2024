@@ -4,6 +4,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:HanoiTowerOS201"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:b="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d"
       Foreground="{DynamicResource Default_ForeColor}" FontSize="36">
     <Page.Resources>
@@ -18,9 +19,13 @@
             <Rectangle Width="{Binding Id, Converter={StaticResource Disk_Id_Width}}" Height="30" Fill="{DynamicResource Phone_Blue}" RadiusX="6" RadiusY="6">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
-                        <TranslateTransform X="{Binding TowerId.Value, Converter={StaticResource Disk_TowerId_X}}" Y="{Binding IndexInTower.Value, Converter={StaticResource Disk_Index_Y}}"/>
+                        <TranslateTransform X="{Binding EasedValue, ElementName=EasingX}" Y="{Binding EasedValue, ElementName=EasingY}"/>
                     </TransformGroup>
                 </Rectangle.RenderTransform>
+                <b:Interaction.Behaviors>
+                    <local:EasingDoubleBehavior x:Name="EasingX" Value="{Binding TowerId.Value, Converter={StaticResource Disk_TowerId_X}}" Easing="{StaticResource CubicEaseOut}" TimeSpan="{x:Static local:AppModel.EasingTime}"/>
+                    <local:EasingDoubleBehavior x:Name="EasingY" Value="{Binding IndexInTower.Value, Converter={StaticResource Disk_Index_Y}}" Easing="{StaticResource CubicEaseOut}" TimeSpan="{x:Static local:AppModel.EasingTime}"/>
+                </b:Interaction.Behaviors>
             </Rectangle>
         </DataTemplate>
     </Page.Resources>
