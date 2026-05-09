@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:HanoiTowerWpf102"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <SolidColorBrush x:Key="External_BackColor" Color="#FF383838"/>
         <SolidColorBrush x:Key="Default_BackColor" Color="#FF181818"/>
         <SolidColorBrush x:Key="Default_ForeColor" Color="#FFE0E0E0"/>
         <SolidColorBrush x:Key="Default_Blue" Color="#FF3399FF"/>

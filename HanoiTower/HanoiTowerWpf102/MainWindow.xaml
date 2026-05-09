@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HanoiTowerWpf102"
         mc:Ignorable="d"
-        Title="Tower of Hanoi" Height="600" Width="900" FontSize="36" Background="{DynamicResource Default_BackColor}" Foreground="{DynamicResource Default_ForeColor}">
+        Title="Tower of Hanoi" Height="600" Width="900" FontSize="36" Background="{DynamicResource External_BackColor}" Foreground="{DynamicResource Default_ForeColor}">
     <Window.Resources>
         <ItemsPanelTemplate x:Key="TowersTemplate">
             <StackPanel Orientation="Horizontal"/>
@@ -20,14 +20,16 @@
     <Window.DataContext>
         <local:AppModel/>
     </Window.DataContext>
-    <Grid>
-        <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
-        <ItemsControl ItemsSource="{Binding Towers}" ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource TowersTemplate}" Margin="30" RenderTransformOrigin="0.5,0.5">
-            <ItemsControl.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                </TransformGroup>
-            </ItemsControl.RenderTransform>
-        </ItemsControl>
-    </Grid>
+    <Viewbox Margin="20">
+        <Grid Height="600" Width="900" Background="{DynamicResource Default_BackColor}">
+            <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
+            <ItemsControl ItemsSource="{Binding Towers}" ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource TowersTemplate}" Margin="30,60" RenderTransformOrigin="0.5,0.5">
+                <ItemsControl.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                    </TransformGroup>
+                </ItemsControl.RenderTransform>
+            </ItemsControl>
+        </Grid>
+    </Viewbox>
 </Window>
