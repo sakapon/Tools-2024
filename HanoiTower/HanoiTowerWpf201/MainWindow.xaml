@@ -37,10 +37,10 @@
     <Viewbox Margin="20">
         <Grid Height="600" Width="900" Background="{DynamicResource Default_BackColor}">
             <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
-            <ItemsControl ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Disks}" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <ItemsControl ItemsSource="{Binding Disks}" ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <ItemsControl.RenderTransform>
                     <TransformGroup>
-                        <TranslateTransform X="50" Y="360"/>
+                        <TranslateTransform X="50" Y="450"/>
                     </TransformGroup>
                 </ItemsControl.RenderTransform>
             </ItemsControl>
