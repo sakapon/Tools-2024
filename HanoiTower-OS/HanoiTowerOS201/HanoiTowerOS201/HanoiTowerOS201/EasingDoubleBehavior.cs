@@ -15,6 +15,8 @@ namespace HanoiTowerOS201
 
 	public class EasingDoubleBehavior : Behavior<DependencyObject>
 	{
+		public const double DefaultFps = 60;
+
 		public static readonly DependencyProperty ValueProperty =
 			DependencyProperty.Register(nameof(Value), typeof(double), typeof(EasingDoubleBehavior), new PropertyMetadata(double.NaN, OnValueChanged));
 
@@ -25,7 +27,7 @@ namespace HanoiTowerOS201
 			DependencyProperty.Register(nameof(TimeSpan), typeof(TimeSpan), typeof(EasingDoubleBehavior), new PropertyMetadata(TimeSpan.Zero));
 
 		public static readonly DependencyProperty FpsProperty =
-			DependencyProperty.Register(nameof(Fps), typeof(double), typeof(EasingDoubleBehavior), new PropertyMetadata(60.0, null, (_, o) => (double)o > 0 ? o : 60.0));
+			DependencyProperty.Register(nameof(Fps), typeof(double), typeof(EasingDoubleBehavior), new PropertyMetadata(DefaultFps, null, (_, o) => (double)o > 0 ? o : DefaultFps));
 
 		public static readonly DependencyProperty EasingProperty =
 			DependencyProperty.Register(nameof(Easing), typeof(IEasingFunction), typeof(EasingDoubleBehavior), new PropertyMetadata(null));
