@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HanoiTowerWpf102"
         mc:Ignorable="d"
-        Title="Tower of Hanoi" Height="600" Width="900" FontSize="36" Background="{DynamicResource External_BackColor}" Foreground="{DynamicResource Default_ForeColor}">
+        Title="Tower of Hanoi - 102" Height="600" Width="900" Background="{DynamicResource External_BackColor}"
+        Foreground="{DynamicResource Default_ForeColor}" FontSize="36">
     <Window.Resources>
         <ItemsPanelTemplate x:Key="TowersTemplate">
             <StackPanel Orientation="Horizontal"/>
