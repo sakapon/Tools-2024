@@ -7,7 +7,8 @@
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         x:Class="HanoiTowerWpf201.MainWindow"
         mc:Ignorable="d"
-        Title="Tower of Hanoi" Height="600" Width="900" FontSize="36" Background="{DynamicResource Default_BackColor}" Foreground="{DynamicResource Default_ForeColor}">
+        Title="Tower of Hanoi" Height="600" Width="900" Background="{DynamicResource External_BackColor}"
+        Foreground="{DynamicResource Default_ForeColor}" FontSize="36">
     <Window.Resources>
         <local:FuncConverter x:Key="Disk_Id_Width" ToFunc="id =&gt; id * 30 + 10"/>
         <local:FuncConverter x:Key="Disk_TowerId_X" ToFunc="id =&gt; id * 290"/>
@@ -33,14 +34,16 @@
     <Window.DataContext>
         <local:AppModel/>
     </Window.DataContext>
-    <Grid>
-        <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
-        <ItemsControl ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Disks}" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <ItemsControl.RenderTransform>
-                <TransformGroup>
-                    <TranslateTransform X="50" Y="360"/>
-                </TransformGroup>
-            </ItemsControl.RenderTransform>
-        </ItemsControl>
-    </Grid>
+    <Viewbox Margin="20">
+        <Grid Height="600" Width="900" Background="{DynamicResource Default_BackColor}">
+            <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
+            <ItemsControl ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" ItemsSource="{Binding Disks}" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <ItemsControl.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="50" Y="360"/>
+                    </TransformGroup>
+                </ItemsControl.RenderTransform>
+            </ItemsControl>
+        </Grid>
+    </Viewbox>
 </Window>
