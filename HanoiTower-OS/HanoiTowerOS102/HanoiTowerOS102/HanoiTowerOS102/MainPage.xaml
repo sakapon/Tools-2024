@@ -5,7 +5,7 @@
       xmlns:local="clr-namespace:HanoiTowerOS102"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
-      Foreground="{DynamicResource Theme_TextBrush}" FontSize="36">
+      Foreground="{DynamicResource Default_ForeColor}" FontSize="36">
     <Page.Resources>
         <ItemsPanelTemplate x:Key="TowersTemplate">
             <StackPanel Orientation="Horizontal"/>
@@ -21,7 +21,7 @@
         <local:AppModel/>
     </Page.DataContext>
     <Viewbox Margin="20">
-        <Grid Height="600" Width="900" Background="{DynamicResource Theme_BackgroundBrush}">
+        <Grid Height="600" Width="900" Background="{DynamicResource Default_BackColor}">
             <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
             <ItemsControl ItemsSource="{Binding Towers}" ItemTemplate="{DynamicResource TowerTemplate}" ItemsPanel="{DynamicResource TowersTemplate}" Margin="30,60" RenderTransformOrigin="0.5,0.5">
                 <ItemsControl.RenderTransform>
