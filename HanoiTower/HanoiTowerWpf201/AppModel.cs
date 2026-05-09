@@ -6,6 +6,7 @@ namespace HanoiTowerWpf201
 	{
 		const int NumberOfDisks = 6;
 		const int Interval_ms = 400;
+		public static readonly TimeSpan EasingTime = TimeSpan.FromMilliseconds(400);
 
 		readonly Stack<Disk>[] Towers =
 		[
