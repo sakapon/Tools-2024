@@ -1,0 +1,103 @@
+﻿using System.Windows;
+using System.Windows.Interactivity;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
+
+namespace HanoiTowerOS201
+{
+	// Usage Example
+	// 
+	//<TextBlock Text="{Binding EasedValue, ElementName=EasingApprox, StringFormat=\{0:F3\}}">
+	//    <b:Interaction.Behaviors>
+	//        <local:EasingDoubleBehavior x:Name="EasingApprox" Value="{Binding Approx.Value}" TimeSpan="00:00:00.6" Easing="{StaticResource CubicEaseOut}"/>
+	//    </b:Interaction.Behaviors>
+	//</TextBlock>
+
+	public class EasingDoubleBehavior : Behavior<DependencyObject>
+	{
+		public static readonly DependencyProperty ValueProperty =
+			DependencyProperty.Register(nameof(Value), typeof(double), typeof(EasingDoubleBehavior), new PropertyMetadata(double.NaN, OnValueChanged));
+
+		public static readonly DependencyProperty EasedValueProperty =
+			DependencyProperty.Register(nameof(EasedValue), typeof(double), typeof(EasingDoubleBehavior), new PropertyMetadata(double.NaN));
+
+		public static readonly DependencyProperty TimeSpanProperty =
+			DependencyProperty.Register(nameof(TimeSpan), typeof(TimeSpan), typeof(EasingDoubleBehavior), new PropertyMetadata(TimeSpan.Zero));
+
+		public static readonly DependencyProperty FpsProperty =
+			DependencyProperty.Register(nameof(Fps), typeof(double), typeof(EasingDoubleBehavior), new PropertyMetadata(60.0, null, (_, o) => (double)o > 0 ? o : 60.0));
+
+		public static readonly DependencyProperty EasingProperty =
+			DependencyProperty.Register(nameof(Easing), typeof(IEasingFunction), typeof(EasingDoubleBehavior), new PropertyMetadata(null));
+
+		public double Value
+		{
+			get { return (double)GetValue(ValueProperty); }
+			set { SetValue(ValueProperty, value); }
+		}
+
+		public double EasedValue
+		{
+			get { return (double)GetValue(EasedValueProperty); }
+			set { SetValue(EasedValueProperty, value); }
+		}
+
+		public TimeSpan TimeSpan
+		{
+			get { return (TimeSpan)GetValue(TimeSpanProperty); }
+			set { SetValue(TimeSpanProperty, value); }
+		}
+
+		public double Fps
+		{
+			get { return (double)GetValue(FpsProperty); }
+			set { SetValue(FpsProperty, value); }
+		}
+
+		public IEasingFunction Easing
+		{
+			get { return (IEasingFunction)GetValue(EasingProperty); }
+			set { SetValue(EasingProperty, value); }
+		}
+
+		static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			((EasingDoubleBehavior)d).OnValueChanged((double)e.OldValue, (double)e.NewValue);
+		}
+
+		DateTime startTime;
+
+		void OnValueChanged(double oldValue, double newValue)
+		{
+			if (double.IsNaN(oldValue) || TimeSpan <= TimeSpan.Zero)
+			{
+				EasedValue = newValue;
+				return;
+			}
+
+			var st = startTime = DateTime.Now;
+
+			var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1 / Fps) };
+			timer.Tick += (_, _) =>
+			{
+				if (st != startTime)
+				{
+					timer.Stop();
+					return;
+				}
+
+				var t = (DateTime.Now - st).TotalSeconds / TimeSpan.TotalSeconds;
+				if (t >= 1)
+				{
+					timer.Stop();
+					EasedValue = newValue;
+					return;
+				}
+
+				var v = Easing?.Ease(t) ?? t;
+				EasedValue = oldValue + (newValue - oldValue) * v;
+			};
+			timer.Start();
+		}
+	}
+}
