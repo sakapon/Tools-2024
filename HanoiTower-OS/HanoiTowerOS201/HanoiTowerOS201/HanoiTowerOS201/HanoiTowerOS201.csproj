@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Compile Include="App.xaml.cs" />
+    <Compile Include="AppModel.cs" />
     <Compile Include="MainPage.xaml.cs" />
   </ItemGroup>
 
