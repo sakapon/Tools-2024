@@ -5,6 +5,7 @@
       xmlns:local="clr-namespace:HanoiTowerOS102"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d"
+      d:DesignHeight="360" d:DesignWidth="600"
       Foreground="{DynamicResource Default_ForeColor}" FontSize="36">
     <Page.Resources>
         <ItemsPanelTemplate x:Key="TowersTemplate">
