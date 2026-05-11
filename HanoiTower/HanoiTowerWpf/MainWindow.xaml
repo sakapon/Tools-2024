@@ -37,7 +37,7 @@
             </Rectangle>
         </DataTemplate>
         <DataTemplate x:Key="TowerTemplate">
-            <Rectangle Width="250" Height="50" Fill="{DynamicResource Phone_Orange}" RadiusX="6" RadiusY="6" Cursor="Hand">
+            <Rectangle Width="250" Height="50" Fill="{DynamicResource Phone_Orange}" RadiusX="6" RadiusY="6" Cursor="ScrollAll">
                 <b:Interaction.Behaviors>
                     <local:MouseDragBehavior Delta="{Binding Delta.Value}"/>
                 </b:Interaction.Behaviors>
