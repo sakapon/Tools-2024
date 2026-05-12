@@ -4,7 +4,7 @@ namespace HanoiTowerWpf101
 {
 	public class AppModel
 	{
-		const int NumberOfDisks = 5;
+		const int NumberOfDisks = 6;
 
 		readonly Stack<Disk>[] Towers =
 		[
@@ -19,7 +19,11 @@ namespace HanoiTowerWpf101
 		public AppModel()
 		{
 			Disks = [.. Towers[0]];
-			Task.Run(() => MoveTower(NumberOfDisks, 0, 2, 1));
+			Task.Run(() =>
+			{
+				Thread.Sleep(1000);
+				MoveTower(NumberOfDisks, 0, 2, 1);
+			});
 		}
 
 		void MoveTower(int n, int from, int to, int via)
@@ -32,10 +36,10 @@ namespace HanoiTowerWpf101
 
 		void MoveDisk(int from, int to)
 		{
-			Thread.Sleep(300);
+			Thread.Sleep(400);
 			var disk = Towers[from].Pop();
 			disk.TowerId.Value = to;
-			disk.Index.Value = Towers[to].Count;
+			disk.IndexInTower.Value = Towers[to].Count;
 			Towers[to].Push(disk);
 			Count.Value++;
 		}

@@ -1,0 +1,48 @@
+﻿<Page x:Class="HanoiTowerOS201.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:HanoiTowerOS201"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:b="http://schemas.microsoft.com/expression/2010/interactivity"
+      mc:Ignorable="d"
+      d:DesignHeight="360" d:DesignWidth="600"
+      Foreground="{DynamicResource Default_ForeColor}" FontSize="36">
+    <Page.Resources>
+        <local:FuncConverter x:Key="Disk_Id_Width" ToFunc="{x:Static local:ViewFuncs.Disk_Id_Width}"/>
+        <local:FuncConverter x:Key="Disk_TowerId_X" ToFunc="{x:Static local:ViewFuncs.Disk_TowerId_X}"/>
+        <local:FuncConverter x:Key="Disk_Index_Y" ToFunc="{x:Static local:ViewFuncs.Disk_Index_Y}"/>
+        <CubicEase x:Key="CubicEaseOut" EasingMode="EaseOut"/>
+        <ItemsPanelTemplate x:Key="DisksTemplate">
+            <Grid/>
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="DiskTemplate">
+            <Rectangle Width="{Binding Id, Converter={StaticResource Disk_Id_Width}}" Height="30" Fill="{DynamicResource Phone_Blue}" RadiusX="6" RadiusY="6">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding EasedValue, ElementName=EasingX}" Y="{Binding EasedValue, ElementName=EasingY}"/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+                <b:Interaction.Behaviors>
+                    <local:EasingDoubleBehavior x:Name="EasingX" Value="{Binding TowerId.Value, Converter={StaticResource Disk_TowerId_X}}" Easing="{StaticResource CubicEaseOut}" TimeSpan="{x:Static local:AppModel.EasingTime}"/>
+                    <local:EasingDoubleBehavior x:Name="EasingY" Value="{Binding IndexInTower.Value, Converter={StaticResource Disk_Index_Y}}" Easing="{StaticResource CubicEaseOut}" TimeSpan="{x:Static local:AppModel.EasingTime}"/>
+                </b:Interaction.Behaviors>
+            </Rectangle>
+        </DataTemplate>
+    </Page.Resources>
+    <Page.DataContext>
+        <local:AppModel/>
+    </Page.DataContext>
+    <Viewbox Margin="20">
+        <Grid Height="560" Width="900" Background="{DynamicResource Default_BackColor}">
+            <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
+            <ItemsControl ItemsSource="{Binding Disks}" ItemTemplate="{DynamicResource DiskTemplate}" ItemsPanel="{DynamicResource DisksTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <ItemsControl.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="50" Y="450"/>
+                    </TransformGroup>
+                </ItemsControl.RenderTransform>
+            </ItemsControl>
+        </Grid>
+    </Viewbox>
+</Page>

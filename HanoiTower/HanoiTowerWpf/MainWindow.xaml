@@ -7,8 +7,9 @@
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         x:Class="HanoiTowerWpf.MainWindow"
         mc:Ignorable="d"
-        Title="Tower of Hanoi" Height="600" Width="900" FontSize="36">
+        Title="Tower of Hanoi" Height="600" Width="900" FontSize="36" Background="{DynamicResource Default_BackColor}" Foreground="{DynamicResource Default_ForeColor}">
     <Window.Resources>
+        <CubicEase x:Key="CubicEaseOut" EasingMode="EaseOut"/>
         <ItemsPanelTemplate x:Key="DisksTemplate">
             <Grid/>
         </ItemsPanelTemplate>
@@ -17,23 +18,15 @@
                 <Storyboard x:Key="MovedStoryboard">
                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MovedTransform" Storyboard.TargetProperty="X">
                         <EasingDoubleKeyFrame KeyTime="00:00:00"/>
-                        <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="0">
-                            <EasingDoubleKeyFrame.EasingFunction>
-                                <CubicEase EasingMode="EaseOut"/>
-                            </EasingDoubleKeyFrame.EasingFunction>
-                        </EasingDoubleKeyFrame>
+                        <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="0" EasingFunction="{StaticResource CubicEaseOut}"/>
                     </DoubleAnimationUsingKeyFrames>
                     <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MovedTransform" Storyboard.TargetProperty="Y">
                         <EasingDoubleKeyFrame KeyTime="00:00:00"/>
-                        <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="0">
-                            <EasingDoubleKeyFrame.EasingFunction>
-                                <CubicEase EasingMode="EaseOut"/>
-                            </EasingDoubleKeyFrame.EasingFunction>
-                        </EasingDoubleKeyFrame>
+                        <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value="0" EasingFunction="{StaticResource CubicEaseOut}"/>
                     </DoubleAnimationUsingKeyFrames>
                 </Storyboard>
             </DataTemplate.Resources>
-            <Rectangle Width="{Binding Width}" Height="30" Fill="#FF3399FF" RadiusX="6" RadiusY="6" Loaded="DiskRectangle_Loaded">
+            <Rectangle Width="{Binding Width}" Height="30" Fill="{DynamicResource Phone_Blue}" RadiusX="6" RadiusY="6" Loaded="DiskRectangle_Loaded">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <TranslateTransform Y="{Binding Delta.Value.Y}"/>
@@ -44,7 +37,7 @@
             </Rectangle>
         </DataTemplate>
         <DataTemplate x:Key="TowerTemplate">
-            <Rectangle Width="250" Height="50" Fill="#FFFF9933" RadiusX="6" RadiusY="6" Cursor="Hand">
+            <Rectangle Width="250" Height="50" Fill="{DynamicResource Phone_Orange}" RadiusX="6" RadiusY="6" Cursor="ScrollAll">
                 <b:Interaction.Behaviors>
                     <local:MouseDragBehavior Delta="{Binding Delta.Value}"/>
                 </b:Interaction.Behaviors>

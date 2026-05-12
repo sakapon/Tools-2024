@@ -1,13 +1,13 @@
-﻿<Window x:Class="HanoiTowerWpf102.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HanoiTowerWpf102"
-        mc:Ignorable="d"
-        Title="Tower of Hanoi - 102" Height="600" Width="900" Background="{DynamicResource External_BackColor}"
-        Foreground="{DynamicResource Default_ForeColor}" FontSize="36">
-    <Window.Resources>
+﻿<Page x:Class="HanoiTowerOS102.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:HanoiTowerOS102"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      d:DesignHeight="360" d:DesignWidth="600"
+      Foreground="{DynamicResource Default_ForeColor}" FontSize="36">
+    <Page.Resources>
         <ItemsPanelTemplate x:Key="TowersTemplate">
             <StackPanel Orientation="Horizontal"/>
         </ItemsPanelTemplate>
@@ -17,10 +17,10 @@
         <DataTemplate x:Key="DiskTemplate">
             <Rectangle Width="{Binding Width}" Height="30" Fill="{DynamicResource Phone_Blue}" Margin="1" RadiusX="6" RadiusY="6"/>
         </DataTemplate>
-    </Window.Resources>
-    <Window.DataContext>
+    </Page.Resources>
+    <Page.DataContext>
         <local:AppModel/>
-    </Window.DataContext>
+    </Page.DataContext>
     <Viewbox Margin="20">
         <Grid Height="560" Width="900" Background="{DynamicResource Default_BackColor}">
             <TextBlock Text="{Binding Count.Value}" Margin="50,30" HorizontalAlignment="Right"/>
@@ -33,4 +33,4 @@
             </ItemsControl>
         </Grid>
     </Viewbox>
-</Window>
+</Page>
